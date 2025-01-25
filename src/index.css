@@ -1,7 +1,28 @@
 @import "tailwindcss";
 
-* {
+/* * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+} */
+
+body {
+  font-family: "Nunito", sans-serif;
+  background-color: #f3f4f6;
+}
+
+/* Custom Colors */
+@layer utilities {
+  .text-primary {
+    color: #19a270; /* Primary Color */
+  }
+  .text-back {
+    color: #3c3b39; /* Primary Color */
+  }
+  .bg-primary {
+    background-color: #19a270; /* Primary Color */
+  }
+  .text-secondary {
+    color: #19a270; /* Secondary Color */
+  }
 }
