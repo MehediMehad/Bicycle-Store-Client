@@ -1,50 +1,14 @@
-import { Layout, Menu, MenuProps } from "antd";
+import { Layout, Menu } from "antd";
 import logo from "../../assets/icons/logo.png";
-import {
-  DashboardOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  PlusOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons"; // Icons for trigger
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons"; // Icons for trigger
 import React from "react";
 import { Outlet } from "react-router-dom";
+import { adminSidebarItems } from "../../routes/admin.routes";
 
 const { Header, Content, Sider } = Layout;
 
 const AdminLayout = () => {
   const [collapsed, setCollapsed] = React.useState(false);
-
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      icon: <DashboardOutlined />, // Icon for Dashboard
-      label: "Dashboard",
-    },
-    {
-      key: "2",
-      icon: <UserOutlined />, // Icon for Profile
-      label: "Profile",
-    },
-    {
-      key: "3",
-      icon: <TeamOutlined />, // Icon for User Management
-      label: "User Management",
-      children: [
-        {
-          key: "11",
-          icon: <PlusOutlined />, // Icon for Create Admin
-          label: "Create Admin",
-        },
-        {
-          key: "12",
-          icon: <PlusOutlined />, // Icon for Create Student
-          label: "Create Student",
-        },
-      ],
-    },
-  ];
 
   return (
     <Layout style={{ height: "100vh" }}>
@@ -103,8 +67,8 @@ const AdminLayout = () => {
         <Menu
           theme="light"
           mode="inline"
-          defaultSelectedKeys={["4"]}
-          items={items}
+          defaultSelectedKeys={["Dashboard"]}
+          items={adminSidebarItems}
         />
       </Sider>
       <Layout>
