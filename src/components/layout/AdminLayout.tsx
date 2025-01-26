@@ -9,6 +9,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons"; // Icons for trigger
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 const { Header, Content, Sider } = Layout;
 
@@ -118,7 +119,7 @@ const AdminLayout = () => {
               minHeight: "100vh",
             }}
           >
-            The Main Content
+            <Outlet />
           </div>
         </Content>
       </Layout>

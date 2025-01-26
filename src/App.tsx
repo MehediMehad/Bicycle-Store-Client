@@ -1,8 +1,8 @@
-import MainLayout from "./components/layout/MainLayout";
+import AdminLayout from "./components/layout/AdminLayout";
 import "./index.css";
 
 const App = () => {
-  return <MainLayout />;
+  return <AdminLayout />;
 };
 
 export default App;
