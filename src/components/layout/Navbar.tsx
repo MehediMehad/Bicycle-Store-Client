@@ -85,10 +85,10 @@ const Navbar = () => {
 };
 
 export default Navbar;
-export const NavbarMenu = [
+const NavbarMenu = [
   { id: 1, title: "Home", link: "/" },
-  { id: 2, title: "Bicycles", link: "#" },
+  { id: 2, title: "Bicycles", link: "bicycles" },
   { id: 3, title: "About ", link: "#" },
-  { id: 4, title: "Dashboard", link: "#" },
+  { id: 4, title: "Dashboard", link: "admin/dashboard" },
   // { id: 5, title: "Pricing", link: "#" },
 ];
