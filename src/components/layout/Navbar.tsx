@@ -3,11 +3,13 @@ import logo from "../../assets/icons/logo.png";
 import { MdMenu } from "react-icons/md";
 import ResponsiveMenu from "./ResponsiveMenu";
 import { NavLink } from "react-router-dom";
-import { useAppDispatch } from "../../redux/hooks";
-import { logout } from "../../redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { logout, useCurrentUser } from "../../redux/features/auth/authSlice";
 import { toast } from "sonner";
 // import ResponsiveMenu from "./ResponsiveMenu";
 const Navbar = () => {
+  const user = useAppSelector(useCurrentUser);
+
   const dispatch = useAppDispatch();
   const [open, setOpen] = React.useState(false);
   const handleLogout = () => {
@@ -51,18 +53,21 @@ const Navbar = () => {
             <button className="text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-200">
               <PiShoppingCartThin />
             </button> */}
-            <NavLink
-              to="login"
-              className="font-semibold hover:cursor-pointer hover:bg-[#19a270] rounded-md border-2 hover:border-2 text-back hover:text-white px-6 py-2 duration-200 hidden md:block"
-            >
-              Login
-            </NavLink>
-            <button
-              onClick={handleLogout}
-              className="font-semibold hover:cursor-pointer hover:bg-[#19a270] rounded-md border-2 hover:border-2 text-back hover:text-white px-6 py-2 duration-200 hidden md:block"
-            >
-              Logout
-            </button>
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="font-semibold hover:cursor-pointer hover:bg-[#19a270] rounded-md border-2 hover:border-2 text-back hover:text-white px-6 py-2 duration-200 hidden md:block"
+              >
+                Logout
+              </button>
+            ) : (
+              <NavLink
+                to="login"
+                className="font-semibold hover:cursor-pointer hover:bg-[#19a270] rounded-md border-2 hover:border-2 text-back hover:text-white px-6 py-2 duration-200 hidden md:block"
+              >
+                Login
+              </NavLink>
+            )}
           </div>
           {/* MOBILE HAMBURGER MENU SECTION */}
           <div
