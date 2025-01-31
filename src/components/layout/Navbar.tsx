@@ -3,9 +3,17 @@ import logo from "../../assets/icons/logo.png";
 import { MdMenu } from "react-icons/md";
 import ResponsiveMenu from "./ResponsiveMenu";
 import { NavLink } from "react-router-dom";
+import { useAppDispatch } from "../../redux/hooks";
+import { logout } from "../../redux/features/auth/authSlice";
+import { toast } from "sonner";
 // import ResponsiveMenu from "./ResponsiveMenu";
 const Navbar = () => {
+  const dispatch = useAppDispatch();
   const [open, setOpen] = React.useState(false);
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success("Logout Successfully !", { duration: 2000 });
+  };
   return (
     <>
       <nav className="bg-white shadow-md">
@@ -49,6 +57,12 @@ const Navbar = () => {
             >
               Login
             </NavLink>
+            <button
+              onClick={handleLogout}
+              className="font-semibold hover:cursor-pointer hover:bg-[#19a270] rounded-md border-2 hover:border-2 text-back hover:text-white px-6 py-2 duration-200 hidden md:block"
+            >
+              Logout
+            </button>
           </div>
           {/* MOBILE HAMBURGER MENU SECTION */}
           <div
@@ -73,9 +87,3 @@ export const NavbarMenu = [
   { id: 4, title: "Dashboard", link: "#" },
   // { id: 5, title: "Pricing", link: "#" },
 ];
-
-<div className="flex">
-  <div className="">1</div>
-  <div className="">2</div>
-  <div className="">3</div>
-</div>;
