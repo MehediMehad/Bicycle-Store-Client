@@ -4,7 +4,6 @@ import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
-// 27-6 (IMPORTANT) set cookies in the browser
 const Login = () => {
   const [login, { error }] = useLoginMutation(undefined);
   const dispatch = useAppDispatch();
