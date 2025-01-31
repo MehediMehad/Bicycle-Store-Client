@@ -3,6 +3,7 @@ import MainLayout from "../components/layout/MainLayout";
 import AdminLayout from "../components/layout/AdminLayout";
 import { adminRoutes } from "./admin.routes";
 import { userPaths } from "./user.routes";
+import Login from "../pages/Login";
 
 const routes = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <h1>Login</h1>,
+    element: <Login />,
   },
   {
     path: "/registration",

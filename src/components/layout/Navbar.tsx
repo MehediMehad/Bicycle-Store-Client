@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../../assets/icons/logo.png";
 import { MdMenu } from "react-icons/md";
 import ResponsiveMenu from "./ResponsiveMenu";
+import { NavLink } from "react-router-dom";
 // import ResponsiveMenu from "./ResponsiveMenu";
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
@@ -42,9 +43,12 @@ const Navbar = () => {
             <button className="text-2xl hover:bg-primary hover:text-white rounded-full p-2 duration-200">
               <PiShoppingCartThin />
             </button> */}
-            <button className="font-semibold hover:cursor-pointer hover:bg-[#19a270] rounded-md border-2 hover:border-2 text-back hover:text-white px-6 py-2 duration-200 hidden md:block">
+            <NavLink
+              to="login"
+              className="font-semibold hover:cursor-pointer hover:bg-[#19a270] rounded-md border-2 hover:border-2 text-back hover:text-white px-6 py-2 duration-200 hidden md:block"
+            >
               Login
-            </button>
+            </NavLink>
           </div>
           {/* MOBILE HAMBURGER MENU SECTION */}
           <div
