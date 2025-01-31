@@ -1,11 +1,14 @@
 import { Button } from "antd";
 import { useForm } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
+import { useAppDispatch } from "../redux/hooks";
+import { setUser } from "../redux/features/auth/authSlice";
+import { verifyToken } from "../utils/verifyToken";
 // 27-6 (IMPORTANT) set cookies in the browser
 const Login = () => {
-  const [login, { data, error }] = useLoginMutation(undefined);
+  const [login, { error }] = useLoginMutation(undefined);
+  const dispatch = useAppDispatch();
 
-  console.log("Data=>", data);
   console.log("Error=>", error);
 
   const { register, handleSubmit } = useForm({
@@ -15,12 +18,15 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
     const userInfo = {
       ...data,
     };
-    login(userInfo);
+    const res = await login(userInfo).unwrap();
+    const user = verifyToken(res.data.accessToken);
+
+    dispatch(setUser({ user, token: res.data.accessToken }));
   };
 
   return (
