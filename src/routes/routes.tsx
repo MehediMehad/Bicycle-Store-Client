@@ -4,6 +4,7 @@ import AdminLayout from "../components/layout/AdminLayout";
 import { adminRoutes } from "./admin.routes";
 import { userPaths } from "./user.routes";
 import Login from "../pages/Login";
+import ProtectedRoute from "../components/layout/ProtectedRoute";
 
 const routes = createBrowserRouter([
   {
@@ -13,7 +14,11 @@ const routes = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: (
+      <ProtectedRoute>
+        <AdminLayout />,
+      </ProtectedRoute>
+    ),
     children: adminRoutes,
   },
   {
