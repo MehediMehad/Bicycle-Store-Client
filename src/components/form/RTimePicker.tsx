@@ -1,16 +1,18 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { Form, TimePicker } from "antd";
+import cn from "../../lib/cn";
 
 type TRDatePicker = {
   name: string;
   label: string;
+  className?: string;
 };
 
-const RTimePicker = ({ name, label }: TRDatePicker) => {
+const RTimePicker = ({ name, label, className }: TRDatePicker) => {
   const { control } = useFormContext();
 
   return (
-    <div style={{ marginBottom: "10px" }}>
+    <div style={{ marginBottom: "10px" }} className={cn("mx-auto", className)}>
       <Controller
         name={name}
         control={control}

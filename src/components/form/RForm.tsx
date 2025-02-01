@@ -44,7 +44,7 @@ const RForm = ({
   return (
     <FormProvider {...methods}>
       <Form
-        className={cn("px-4 py-2 font-bold", className)}
+        className={cn("", className)}
         layout="vertical"
         onFinish={methods.handleSubmit(submit)}
       >

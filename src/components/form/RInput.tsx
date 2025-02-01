@@ -1,15 +1,17 @@
 import { Form, Input } from "antd";
 import { Controller } from "react-hook-form";
+import cn from "../../lib/cn";
 type TInputProps = {
   type: string;
   name: string;
   label?: string;
   disabled?: boolean;
+  className?: string;
 };
 
-const RInput = ({ type, name, label, disabled }: TInputProps) => {
+const RInput = ({ type, name, label, disabled, className }: TInputProps) => {
   return (
-    <div style={{ marginBottom: "20px" }}>
+    <div style={{ marginBottom: "20px" }} className={cn("mx-auto", className)}>
       <Controller
         name={name}
         render={({ field }) => (
