@@ -8,6 +8,7 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
+import cn from "../../lib/cn";
 type TFormConfig = {
   defaultValues?: Record<string, any>;
   resolver?: any;
@@ -16,9 +17,16 @@ type TFormConfig = {
 type TFormProps = {
   onSubmit: SubmitErrorHandler<FieldValues>;
   children: ReactNode;
+  className?: string;
 } & TFormConfig;
 
-const RForm = ({ onSubmit, children, defaultValues, resolver }: TFormProps) => {
+const RForm = ({
+  onSubmit,
+  children,
+  defaultValues,
+  resolver,
+  className,
+}: TFormProps) => {
   const formConfig: TFormConfig = {};
   if (defaultValues) {
     formConfig["defaultValues"] = defaultValues;
@@ -35,7 +43,11 @@ const RForm = ({ onSubmit, children, defaultValues, resolver }: TFormProps) => {
 
   return (
     <FormProvider {...methods}>
-      <Form layout="vertical" onFinish={methods.handleSubmit(submit)}>
+      <Form
+        className={cn("px-4 py-2 font-bold", className)}
+        layout="vertical"
+        onFinish={methods.handleSubmit(submit)}
+      >
         {children}
       </Form>
     </FormProvider>

@@ -1,11 +1,13 @@
 import { Button } from "antd";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser, TUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import RForm from "../components/form/RForm";
+import RInput from "../components/form/RInput";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -13,12 +15,10 @@ const Login = () => {
 
   console.log("Error=>", error);
 
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      email: "jon@example.com",
-      password: "user1234",
-    },
-  });
+  const defaultValues = {
+    email: "jon@example.com",
+    password: "user1234",
+  };
 
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Logging in");
@@ -42,27 +42,11 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="">
-        <label htmlFor="email">Email:</label>
-        <input
-          className="border-2 mt-2 "
-          type="email"
-          id="email"
-          {...register("email")}
-        />
-      </div>
-      <div className="">
-        <label htmlFor="password">Password:</label>
-        <input
-          className="border-2 mt-2"
-          type="text"
-          id="password"
-          {...register("password")}
-        />
-      </div>
+    <RForm className="w-full" onSubmit={onSubmit} defaultValues={defaultValues}>
+      <RInput type="text" name="email" label="Email:" />
+      <RInput type="text" name="password" label="Password:" />
       <Button htmlType="submit">Login</Button>
-    </form>
+    </RForm>
   );
 };
 
