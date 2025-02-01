@@ -5,6 +5,7 @@ import { adminRoutes } from "./admin.routes";
 import { userPaths } from "./user.routes";
 import Login from "../pages/Login";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
+import Registration from "../pages/Registration";
 
 const routes = createBrowserRouter([
   {
@@ -26,8 +27,8 @@ const routes = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/registration",
-    element: <h1>Registration</h1>,
+    path: "/create-account",
+    element: <Registration />,
   },
 ]);
 

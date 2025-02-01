@@ -1,44 +1,39 @@
 import logo from "../../src/assets/icons/logo.png";
 import { Button } from "antd";
 import { FieldValues } from "react-hook-form";
-import { useLoginMutation } from "../redux/features/auth/authApi";
-import { useAppDispatch } from "../redux/hooks";
-import { setUser, TUser } from "../redux/features/auth/authSlice";
-import { verifyToken } from "../utils/verifyToken";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import RForm from "../components/form/RForm";
 import RInput from "../components/form/RInput";
-const Login = () => {
+import { useAddUserMutation } from "../redux/features/auth/authApi";
+const Registration = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const [login, { error }] = useLoginMutation(undefined);
-
-  console.log("Error=>", error);
-
-  const defaultValues = {
-    email: "jon@example.com",
-    password: "user1234",
-  };
+  const [addUser] = useAddUserMutation(undefined);
 
   const onSubmit = async (data: FieldValues) => {
-    const toastId = toast.loading("Logging in");
+    const toastId = toast.loading("User Creating...");
     try {
       const userInfo = {
         ...data,
       };
-      const res = await login(userInfo).unwrap();
-      const user = verifyToken(res.data.accessToken) as TUser;
+      await addUser(userInfo).unwrap();
       toast.dismiss(toastId);
-      dispatch(setUser({ user: user, token: res.data.accessToken }));
-      toast.success("Logged in", { duration: 2000 });
-      navigate("/");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      toast.dismiss(toastId);
-      toast.error(err.data.message || "Something went wrong", {
+      navigate("/login");
+      toast.error("User Created Successfully", {
         duration: 3000,
       });
+    } catch (err: any) {
+      if (err.data?.message === "Invalid ID") {
+        toast.dismiss(toastId);
+        toast.error("This User already exists", {
+          duration: 3000,
+        });
+      } else {
+        toast.dismiss(toastId);
+        toast.error(err.data?.message || "Something went wrong", {
+          duration: 3000,
+        });
+      }
     }
   };
 
@@ -55,11 +50,13 @@ const Login = () => {
         </div>
 
         {/* 🔹 Login Form */}
-        <RForm
-          className="space-y-4"
-          onSubmit={onSubmit}
-          defaultValues={defaultValues}
-        >
+        <RForm className="space-y-4" onSubmit={onSubmit}>
+          <RInput
+            type="text"
+            name="name"
+            label="Name:"
+            className="w-full border-gray-300 rounded-md focus:ring-blue-500"
+          />
           <RInput
             type="text"
             name="email"
@@ -76,17 +73,14 @@ const Login = () => {
             htmlType="submit"
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition duration-300"
           >
-            Login
+            Signup
           </Button>
         </RForm>
 
         {/* 🔹 Footer Links */}
         <div className="mt-4 text-center text-sm text-gray-500">
-          <NavLink
-            to="/create-account"
-            className="text-blue-500 hover:underline"
-          >
-            Create an account
+          <NavLink to="/login" className="text-blue-500 hover:underline">
+            Login an account
           </NavLink>
         </div>
       </div>
@@ -94,4 +88,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Registration;
