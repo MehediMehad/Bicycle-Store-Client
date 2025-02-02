@@ -1,43 +1,76 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
-import RFileUpload from "../../../../components/form/RFileUpload";
 import RSelect from "../../../../components/form/RSelect";
-import { Button } from "antd";
+import { Button, Form, Input } from "antd";
 import RInput from "../../../../components/form/RInput";
 import RForm from "../../../../components/form/RForm";
-import { useForm } from "react-hook-form";
 import RTextArea from "../../../../components/form/RTextArea";
 import {
+  bicycleBrandOptions,
   bicycleColorOptions,
   bicycleTypeOptions,
 } from "../../../../constants/product.constant";
-
-const addProductValidationSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  brand: z.string().min(1, "Brand is required"),
-  price: z.number().min(0, "Price must be a positive number"),
-  quantity: z.number().int().min(0, "Quantity must be a non-negative integer"),
-  type: z.enum(["Mountain", "Road", "Hybrid", "BMX", "Electric"]),
-  color: z.enum(["Red", "Blue", "Black", "White", "Green", "Yellow", "Gray"]),
-  description: z.string().min(1, "Description is required"),
-  image: z.string().url("Image must be a valid URL").optional(),
-  inStock: z.boolean(),
-});
+import { useAddBicycleMutation } from "../../../../redux/features/admin/bicycleManagement";
+import { Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addProductValidationSchema } from "../../../../schemas/product";
+import { toast } from "sonner";
 
 const AddProduct = () => {
-  const onSubmit = (data: any) => {
+  const [addBicycle, { data, error }] = useAddBicycleMutation();
+  console.log({ data, error });
+
+  const onSubmit = async (data: any) => {
     console.log("Product Data:", data);
+    const toastId = toast.loading("Logging in");
+    try {
+      const bicycleData = {
+        name: data.name,
+        brand: data.brand,
+        price: Number(data.price),
+        type: data.type,
+        color: data.color,
+        description: data.description,
+        quantity: Number(data.quantity),
+        inStock: true,
+      };
+      const formData = new FormData();
+      formData.append("data", JSON.stringify(bicycleData));
+      formData.append("file", data.profileImg);
+      const res = await addBicycle(formData).unwrap();
+      toast.dismiss(toastId);
+      toast.success(`${res.message || "Bicycle added successfully..!"}`, {
+        duration: 2000,
+      });
+    } catch (error: any) {
+      const errorMessage =
+        error?.data?.message || "bicycle creating not successful.";
+      toast.dismiss(toastId);
+      toast.success(errorMessage);
+    }
   };
 
   return (
     <div className="p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-xl font-semibold mb-4">Add New Bicycle</h2>
-      <RForm onSubmit={onSubmit} className="space-y-5">
+      <RForm
+        onSubmit={onSubmit}
+        resolver={zodResolver(addProductValidationSchema)}
+        className="space-y-5"
+      >
         {/* Image Upload */}
-        <RFileUpload name="image" label="Upload Image" />
+        <Controller
+          name="profileImg"
+          render={({ field: { onChange, value, ...field } }) => (
+            <Form.Item label="Picture">
+              <Input
+                size="large"
+                type="file"
+                value={value?.fileName}
+                {...field}
+                onChange={(e) => onChange(e.target.files?.[0])}
+              />
+            </Form.Item>
+          )}
+        />
         {/* Name & Brand */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <RInput
@@ -47,12 +80,11 @@ const AddProduct = () => {
             className="w-full"
             placeholder="Name"
           />
-          <RInput
+          <RSelect
             name="brand"
             label="Brand"
-            type="text"
+            options={bicycleBrandOptions}
             className="w-full"
-            placeholder="Brand"
           />
         </div>
 
