@@ -1,3 +1,4 @@
+import FilteredBicycles from "../components/Bicycles/FilteredBicycles";
 import { useGetAllBicycleQuery } from "../redux/features/bicycle/bicycleApi";
 
 const Bicycles = () => {
@@ -6,7 +7,7 @@ const Bicycles = () => {
 
   return (
     <div className="container mx-auto">
-      <h1>This is AllBicycles component</h1>
+      <FilteredBicycles />
     </div>
   );
 };

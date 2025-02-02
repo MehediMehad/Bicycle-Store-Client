@@ -7,9 +7,17 @@ type TInputProps = {
   label?: string;
   disabled?: boolean;
   className?: string;
+  placeholder?: string;
 };
 
-const RInput = ({ type, name, label, disabled, className }: TInputProps) => {
+const RInput = ({
+  type,
+  name,
+  label,
+  disabled,
+  className,
+  placeholder,
+}: TInputProps) => {
   return (
     <div style={{ marginBottom: "20px" }} className={cn("mx-auto", className)}>
       <Controller
@@ -22,6 +30,7 @@ const RInput = ({ type, name, label, disabled, className }: TInputProps) => {
               id={name}
               size="large"
               disabled={disabled}
+              placeholder={placeholder}
             />
           </Form.Item>
         )}

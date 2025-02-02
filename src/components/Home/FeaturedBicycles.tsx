@@ -93,7 +93,7 @@ const FeaturedBicycles = () => {
         </div>
         <div className="">
           <NavLink
-            to={`/all-bicycles`}
+            to={`/bicycles`}
             className="underline text-primary tracking-[0.4px] font-medium cursor-pointer uppercase"
           >
             View All

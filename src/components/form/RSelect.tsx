@@ -3,7 +3,7 @@ import { Controller } from "react-hook-form";
 import cn from "../../lib/cn";
 
 type TRSelectProps = {
-  label: string;
+  label?: string;
   name: string;
   options: { value: string; label: string; disabled?: boolean }[] | undefined;
   disabled?: boolean;
