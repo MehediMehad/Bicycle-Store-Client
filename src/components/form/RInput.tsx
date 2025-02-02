@@ -19,7 +19,7 @@ const RInput = ({
   placeholder,
 }: TInputProps) => {
   return (
-    <div style={{ marginBottom: "20px" }} className={cn("mx-auto", className)}>
+    <div className={cn("mx-auto", className)}>
       <Controller
         name={name}
         render={({ field }) => (
@@ -31,6 +31,7 @@ const RInput = ({
               size="large"
               disabled={disabled}
               placeholder={placeholder}
+              className="w-full"
             />
           </Form.Item>
         )}

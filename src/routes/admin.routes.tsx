@@ -1,6 +1,7 @@
 import { DashboardOutlined, PlusOutlined } from "@ant-design/icons";
 import { TAdminSidebarItem, TRoute } from "../types";
 import { NavLink } from "react-router-dom";
+import AddProduct from "../pages/Dashboard/Admin/ProductManagement/AddProduct";
 
 export const adminPaths = [
   {
@@ -13,7 +14,7 @@ export const adminPaths = [
     name: "Crate Product",
     path: "crate-product",
     icon: <DashboardOutlined />,
-    element: <h1>Crate Product</h1>,
+    element: <AddProduct />,
   },
   {
     name: "User Management",
