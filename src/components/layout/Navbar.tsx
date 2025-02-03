@@ -24,8 +24,9 @@ const Navbar = () => {
           <div className="absolute left-0 text-2xl flex items-center justify-start gap-2 font-bold">
             <img className="w-12" src={logo} alt="" />
             <div className="flex mt-3">
-              <p>Pedal-</p>
-              <p className="text-secondary">Planet</p>
+              <p className="font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-500">
+                Pedal-Planet
+              </p>
             </div>
           </div>
           {/* MENU SECTION */}
@@ -88,7 +89,7 @@ export default Navbar;
 const NavbarMenu = [
   { id: 1, title: "Home", link: "/" },
   { id: 2, title: "Bicycles", link: "bicycles" },
-  { id: 3, title: "About ", link: "#" },
+  { id: 3, title: "About ", link: "about" },
   { id: 4, title: "Dashboard", link: "admin/dashboard" },
   // { id: 5, title: "Pricing", link: "#" },
 ];

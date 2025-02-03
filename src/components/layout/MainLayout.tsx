@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="bg-gradient-to-br from-green-50/10 to-blue-50/10">
       <Navbar />
       <Outlet />
     </div>
