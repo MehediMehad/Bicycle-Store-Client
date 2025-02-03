@@ -1,6 +1,7 @@
 import { useState } from "react";
 import BicycleCard from "./BicycleCard";
 import { useGetAllBicycleQuery } from "../../redux/features/bicycle/bicycleApi";
+import { useDebouncedCallback } from "use-debounce";
 
 type TQueryParam = {
   name: string;
@@ -11,7 +12,7 @@ const FilteredBicycles = () => {
   // State for search, filters, and sort
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
-    priceRange: [0, 2000],
+    priceRange: [12000, 20000],
     brand: "",
     category: "",
     availability: "",
@@ -35,7 +36,7 @@ const FilteredBicycles = () => {
     }
 
     // Add filters
-    if (filters.priceRange[1] !== 2000) {
+    if (filters.priceRange[1] !== 20000) {
       newParams.push({ name: "minPrice", value: filters.priceRange[0] });
       newParams.push({ name: "maxPrice", value: filters.priceRange[1] });
     }
@@ -58,17 +59,32 @@ const FilteredBicycles = () => {
     setParams(newParams);
   };
 
-  // Handle search input change
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-    updateParams();
-  };
+  // Handle search input change with debounce
+  const handleSearchChange = useDebouncedCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchQuery(e.target.value);
+      updateParams();
+    },
+    300
+  );
 
   // Handle price range change
-  const handlePriceRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters({ ...filters, priceRange: [0, Number(e.target.value)] });
-    updateParams();
-  };
+  const handlePriceRangeChange =
+    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = parseInt(e.target.value, 10);
+      const newPriceRange = [...filters.priceRange];
+      newPriceRange[index] = newValue;
+
+      // Ensure min <= max
+      if (index === 0 && newPriceRange[0] > newPriceRange[1]) {
+        newPriceRange[1] = newPriceRange[0];
+      } else if (index === 1 && newPriceRange[1] < newPriceRange[0]) {
+        newPriceRange[0] = newPriceRange[1];
+      }
+
+      setFilters({ ...filters, priceRange: newPriceRange });
+      updateParams();
+    };
 
   // Handle brand filter change
   const handleBrandChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -97,8 +113,11 @@ const FilteredBicycles = () => {
   };
 
   // Handle loading and error states
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error fetching data</div>;
+  if (isLoading) return <div className="text-center py-4">Loading...</div>;
+  if (isError)
+    return (
+      <div className="text-center py-4 text-red-500">Error fetching data</div>
+    );
 
   return (
     <div className="flex p-6 flex-wrap flex-col md:flex-row">
@@ -117,9 +136,17 @@ const FilteredBicycles = () => {
           <input
             type="range"
             min="0"
-            max="2000"
+            max="40000"
+            value={filters.priceRange[0]}
+            onChange={handlePriceRangeChange(0)}
+            className="w-full"
+          />
+          <input
+            type="range"
+            min="0"
+            max="40000"
             value={filters.priceRange[1]}
-            onChange={handlePriceRangeChange}
+            onChange={handlePriceRangeChange(1)}
             className="w-full"
           />
           <p>
@@ -182,9 +209,15 @@ const FilteredBicycles = () => {
 
       {/* Right Side: Bicycle Cards */}
       <div className="md:w-3/4 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-2 md:gap-6 mx-auto">
-        {bicycles?.map((bicycle) => (
-          <BicycleCard key={bicycle.id} bicycle={bicycle} />
-        ))}
+        {bicycles?.length === 0 ? (
+          <div className="text-center py-4 text-gray-500">
+            No bicycles found
+          </div>
+        ) : (
+          bicycles?.map((bicycle) => (
+            <BicycleCard key={bicycle._id} bicycle={bicycle} />
+          ))
+        )}
       </div>
     </div>
   );

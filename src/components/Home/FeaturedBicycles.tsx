@@ -22,7 +22,7 @@ const featuredBicycles = [
     name: "Hybrid Bike",
     price: "$600",
     image:
-      "https://i.postimg.cc/jSvBSCZZ/0519435-duranta-alloy-21-spd-dynamic-x-800-26-blue-removebg.png",
+      "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738522611/Giant.jpg",
   },
   {
     id: 4,

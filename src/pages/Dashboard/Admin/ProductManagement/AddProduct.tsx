@@ -10,8 +10,6 @@ import {
 } from "../../../../constants/product.constant";
 import { useAddBicycleMutation } from "../../../../redux/features/admin/bicycleManagement";
 import { Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { addProductValidationSchema } from "../../../../schemas/product";
 import { toast } from "sonner";
 
 const AddProduct = () => {
@@ -53,7 +51,7 @@ const AddProduct = () => {
       <h2 className="text-xl font-semibold mb-4">Add New Bicycle</h2>
       <RForm
         onSubmit={onSubmit}
-        resolver={zodResolver(addProductValidationSchema)}
+        // resolver={zodResolver(addProductValidationSchema)}
         className="space-y-5"
       >
         {/* Image Upload */}
