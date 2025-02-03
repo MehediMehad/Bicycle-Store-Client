@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { TBicycle } from "../../types";
 
 interface BicycleCardProps {
@@ -48,9 +49,12 @@ const BicycleCard = ({ bicycle }: BicycleCardProps) => {
         {/* Price Section */}
         <div className="mt-auto">
           <div className="flex items-center justify-end">
-            <button className="px-4 py-[6px] cursor-pointer bg-[#19a270] text-white font-medium rounded-lg border border-green-600 shadow-md hover:bg-[#19a262]">
+            <NavLink
+              to={`/details/${bicycle._id}`}
+              className="px-4 py-[6px] cursor-pointer bg-[#19a270] text-white font-medium rounded-lg border border-green-600 shadow-md hover:bg-[#19a262]"
+            >
               View Details
-            </button>
+            </NavLink>
           </div>
         </div>
       </div>
