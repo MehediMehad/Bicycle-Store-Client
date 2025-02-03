@@ -1,4 +1,10 @@
-const BicycleCard = ({ bicycle }) => {
+import { TBicycle } from "../../types";
+
+interface BicycleCardProps {
+  bicycle: TBicycle;
+}
+
+const BicycleCard = ({ bicycle }: BicycleCardProps) => {
   return (
     <div className="border border-gray-200 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
       {/* Image Section */}
@@ -26,18 +32,15 @@ const BicycleCard = ({ bicycle }) => {
         <p className="text-sm text-gray-600 mb-1">
           <span className="font-semibold">Brand:</span> {bicycle.brand}
         </p>
-        <p className="text-sm text-gray-600 mb-1">
-          <span className="font-semibold">Model:</span> {bicycle.model}
-        </p>
         <p className="text-sm text-gray-600 mb-2">
-          <span className="font-semibold">Category:</span> {bicycle.category}
+          <span className="font-semibold">Category:</span> {bicycle.type}
         </p>
 
         {/* Price Section */}
         <div className="mt-auto">
           <div className="flex items-center justify-between">
             <p className="text-lg font-bold text-blue-600">${bicycle.price}</p>
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300">
+            <button className="px-4 py-[6px] bg-[#19a270] text-white font-medium rounded-lg border border-green-600 shadow-md hover:bg-[#19a262]">
               View Details
             </button>
           </div>

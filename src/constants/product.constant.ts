@@ -39,3 +39,10 @@ export const bicycleBrandOptions = bicycleBrand?.map((brand) => ({
   label: brand,
   value: brand,
 }));
+
+const bicycleAvailability = ["Pre-Order", "In Stock"];
+
+export const bicycleAvailabilityOptions = bicycleAvailability?.map((brand) => ({
+  label: brand,
+  value: brand,
+}));

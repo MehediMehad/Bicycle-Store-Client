@@ -1,3 +1,4 @@
+import { TBicycle } from "../../../types";
 import { TQueryParam, TResponseRedux } from "../../../types/global.type";
 import { baseApi } from "../../api/baseApi";
 
@@ -18,7 +19,7 @@ const bicycleApi = baseApi.injectEndpoints({
           params: params,
         };
       },
-      transformResponse: (response: TResponseRedux<any>) => {
+      transformResponse: (response: TResponseRedux<TBicycle[]>) => {
         return {
           data: response.data,
           meta: response.meta,

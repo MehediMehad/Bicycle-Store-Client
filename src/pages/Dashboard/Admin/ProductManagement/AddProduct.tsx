@@ -4,6 +4,7 @@ import RInput from "../../../../components/form/RInput";
 import RForm from "../../../../components/form/RForm";
 import RTextArea from "../../../../components/form/RTextArea";
 import {
+  bicycleAvailabilityOptions,
   bicycleBrandOptions,
   bicycleColorOptions,
   bicycleTypeOptions,
@@ -23,6 +24,7 @@ const AddProduct = () => {
       const bicycleData = {
         name: data.name,
         brand: data.brand,
+        availability: data.availability,
         price: Number(data.price),
         type: data.type,
         color: data.color,
@@ -55,20 +57,28 @@ const AddProduct = () => {
         className="space-y-5"
       >
         {/* Image Upload */}
-        <Controller
-          name="profileImg"
-          render={({ field: { onChange, value, ...field } }) => (
-            <Form.Item label="Picture">
-              <Input
-                size="large"
-                type="file"
-                value={value?.fileName}
-                {...field}
-                onChange={(e) => onChange(e.target.files?.[0])}
-              />
-            </Form.Item>
-          )}
-        />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <Controller
+            name="profileImg"
+            render={({ field: { onChange, value, ...field } }) => (
+              <Form.Item label="Picture">
+                <Input
+                  size="large"
+                  type="file"
+                  value={value?.fileName}
+                  {...field}
+                  onChange={(e) => onChange(e.target.files?.[0])}
+                />
+              </Form.Item>
+            )}
+          />
+          <RSelect
+            name="availability"
+            label="Availability"
+            options={bicycleAvailabilityOptions}
+            className="w-full"
+          />
+        </div>
         {/* Name & Brand */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <RInput
