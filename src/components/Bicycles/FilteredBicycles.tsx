@@ -16,7 +16,9 @@ const FilteredBicycles = () => {
     type: "",
     availability: "",
   });
-  // const [sortBy, setSortBy] = useState("");
+  console.log(">>>>>>", filters);
+
+  const [sortBy, setSortBy] = useState("");
 
   // State for query parameters
   const [params, setParams] = useState<TQueryParam[]>([]);
@@ -50,9 +52,9 @@ const FilteredBicycles = () => {
     }
 
     // Add sort option
-    // if (sortBy) {
-    //   newParams.push({ name: "sort", value: sortBy });
-    // }
+    if (sortBy) {
+      newParams.push({ name: "sort", value: sortBy });
+    }
 
     // Update params state
     setParams(newParams);
@@ -94,25 +96,25 @@ const FilteredBicycles = () => {
     updateParams();
   };
 
-  // // Handle category filter change
-  // const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   setFilters({ ...filters, category: e.target.value });
-  //   updateParams();
-  // };
+  // Handle category filter change
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilters({ ...filters, type: e.target.value });
+    updateParams();
+  };
 
   // Handle availability filter change
-  // const handleAvailabilityChange = (
-  //   e: React.ChangeEvent<HTMLSelectElement>
-  // ) => {
-  //   setFilters({ ...filters, availability: e.target.value });
-  //   updateParams();
-  // };
+  const handleAvailabilityChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setFilters({ ...filters, availability: e.target.value });
+    updateParams();
+  };
 
-  // // Handle sort option change
-  // const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   setSortBy(e.target.value);
-  //   updateParams();
-  // };
+  // Handle sort option change
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(e.target.value);
+    updateParams();
+  };
 
   // Handle loading and error states
   if (isLoading) return <div className="text-center py-4">Loading...</div>;
@@ -172,7 +174,7 @@ const FilteredBicycles = () => {
           </select>
         </div>
 
-        {/* <div className="mb-4">
+        <div className="mb-4">
           <label className="block mb-2">Category</label>
           <select
             value={filters.type}
@@ -183,8 +185,8 @@ const FilteredBicycles = () => {
             <option value="Road">Road</option>
             <option value="Mountain">Mountain</option>
           </select>
-        </div> */}
-        {/* 
+        </div>
+
         <div className="mb-4">
           <label className="block mb-2">Availability</label>
           <select
@@ -196,9 +198,9 @@ const FilteredBicycles = () => {
             <option value="In Stock">In Stock</option>
             <option value="Out of Stock">Out of Stock</option>
           </select>
-        </div> */}
+        </div>
 
-        {/* <div className="mb-4">
+        <div className="mb-4">
           <label className="block mb-2">Sort By</label>
           <select
             value={sortBy}
@@ -209,7 +211,7 @@ const FilteredBicycles = () => {
             <option value="priceLowToHigh">Price: Low to High</option>
             <option value="priceHighToLow">Price: High to Low</option>
           </select>
-        </div> */}
+        </div>
       </div>
 
       {/* Right Side: Bicycle Cards */}

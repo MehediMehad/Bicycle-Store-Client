@@ -24,6 +24,15 @@ const BicycleCard = ({ bicycle }: BicycleCardProps) => {
         >
           {bicycle.availability}
         </span>
+        <span
+          className={`absolute top-2 left-2 px-3 py-1 rounded-full text-xs font-semibold ${
+            bicycle.availability === "In Stock"
+              ? "bg-green-100 text-green-700"
+              : "bg-red-100 text-red-700"
+          }`}
+        >
+          $ {bicycle.price}
+        </span>
       </div>
 
       {/* Details Section */}
@@ -38,9 +47,8 @@ const BicycleCard = ({ bicycle }: BicycleCardProps) => {
 
         {/* Price Section */}
         <div className="mt-auto">
-          <div className="flex items-center justify-between">
-            <p className="text-lg font-bold text-blue-600">${bicycle.price}</p>
-            <button className="px-4 py-[6px] bg-[#19a270] text-white font-medium rounded-lg border border-green-600 shadow-md hover:bg-[#19a262]">
+          <div className="flex items-center justify-end">
+            <button className="px-4 py-[6px] cursor-pointer bg-[#19a270] text-white font-medium rounded-lg border border-green-600 shadow-md hover:bg-[#19a262]">
               View Details
             </button>
           </div>
