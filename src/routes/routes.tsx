@@ -6,6 +6,7 @@ import { userPaths } from "./user.routes";
 import Login from "../pages/Login";
 import ProtectedRoute from "../components/layout/ProtectedRoute";
 import Registration from "../pages/Registration";
+import VerifyOrderPage from "../pages/VerifyOrder";
 
 const routes = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const routes = createBrowserRouter([
   {
     path: "/create-account",
     element: <Registration />,
+  },
+  {
+    path: "/verify-order",
+    element: <VerifyOrderPage />,
   },
 ]);
 

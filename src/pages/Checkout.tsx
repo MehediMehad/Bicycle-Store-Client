@@ -51,7 +51,6 @@ const CheckoutPage = () => {
       quantity: 1,
       totalPrice: bicycle?.price,
     };
-    console.log(">>>>", orderData);
 
     await createOrder(orderData);
   };
