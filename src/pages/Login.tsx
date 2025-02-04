@@ -12,9 +12,7 @@ import RInput from "../components/form/RInput";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [login, { error }] = useLoginMutation(undefined);
-
-  console.log("Error=>", error);
+  const [login] = useLoginMutation(undefined);
 
   const defaultValues = {
     email: "jon@example.com",

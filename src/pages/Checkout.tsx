@@ -1,7 +1,17 @@
-import { useState } from "react";
-import { ShoppingCart, CreditCard, MapPin, User, Check } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ShoppingCart, MapPin, User } from "lucide-react";
+import { useParams } from "react-router-dom";
+import { useGetBicycleQuery } from "../redux/features/bicycle/bicycleApi";
+import { useAppSelector } from "../redux/hooks";
+import { useCreateOrderMutation } from "../redux/features/order/orderApi";
+import { useCurrentUser } from "../redux/features/auth/authSlice";
+import { toast } from "sonner";
 
 const CheckoutPage = () => {
+  const user = useAppSelector(useCurrentUser);
+
+  const [createOrder, { isLoading, isSuccess, data, isError, error }] =
+    useCreateOrderMutation();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -14,27 +24,12 @@ const CheckoutPage = () => {
     cvv: "",
   });
 
-  const [selectedPayment, setSelectedPayment] = useState("credit");
-  const [orderComplete, setOrderComplete] = useState(false);
+  const { id } = useParams();
+  const { data: bicycleData, isFetching: isFetchingBicycle } =
+    useGetBicycleQuery(id);
+  const bicycle = bicycleData?.data;
 
-  const cartItems = [
-    {
-      id: 1,
-      name: "Urban Commuter Bike",
-      price: 799.99,
-      quantity: 1,
-      image: "/api/placeholder/100/100",
-    },
-    {
-      id: 2,
-      name: "Bike Helmet",
-      price: 89.99,
-      quantity: 1,
-      image: "/api/placeholder/100/100",
-    },
-  ];
-
-  const handleInputChange = (e) => {
+  const handleInputChange = async (e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -42,41 +37,44 @@ const CheckoutPage = () => {
     }));
   };
 
-  const calculateTotal = () => {
-    return cartItems
-      .reduce((total, item) => total + item.price * item.quantity, 0)
-      .toFixed(2);
-  };
+  //     return cartItems
+  //       .reduce((total, item) => total + item.price * item.quantity, 0)
+  //       .toFixed(2);
+  //   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     // Simulate order processing
-    setTimeout(() => {
-      setOrderComplete(true);
-    }, 1500);
+    const orderData = {
+      email: user?.userEmail,
+      product: id,
+      quantity: 1,
+      totalPrice: bicycle?.price,
+    };
+    console.log(">>>>", orderData);
+
+    await createOrder(orderData);
   };
 
-  if (orderComplete) {
-    return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="bg-white p-12 rounded-2xl shadow-2xl text-center">
-          <Check className="w-24 h-24 text-green-500 mx-auto mb-6" />
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">
-            Order Confirmed!
-          </h2>
-          <p className="text-gray-600 mb-6">
-            Thank you for your purchase from Pedal Planet.
-          </p>
-          <button
-            onClick={() => setOrderComplete(false)}
-            className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
-          >
-            Continue Shopping
-          </button>
-        </div>
-      </div>
-    );
+  if (isFetchingBicycle) {
+    <p>isFetchingBicycle</p>;
   }
+
+  const toastId = "cart";
+  useEffect(() => {
+    if (isLoading) toast.loading("Processing ...", { id: toastId });
+
+    if (isSuccess) {
+      toast.success(data?.message, { id: toastId });
+      if (data?.data) {
+        setTimeout(() => {
+          window.location.href = data.data;
+        }, 1000);
+      }
+    }
+
+    if (isError) toast.error(JSON.stringify(error), { id: toastId });
+  }, [data?.data, data?.message, error, isError, isLoading, isSuccess]);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4">
@@ -92,37 +90,34 @@ const CheckoutPage = () => {
             <h2 className="text-2xl font-bold mb-6 text-gray-800">
               Order Summary
             </h2>
-            {cartItems.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center justify-between border-b py-4"
-              >
-                <div className="flex items-center">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-16 h-16 rounded-lg mr-4"
-                  />
-                  <div>
-                    <p className="font-semibold">{item.name}</p>
-                    <p className="text-gray-500">Qty: {item.quantity}</p>
-                  </div>
+            {/* Cart */}
+            <div className="flex items-center justify-between border-b py-4">
+              <div className="flex items-center">
+                <img
+                  src={bicycle?.image}
+                  alt={bicycle?.name}
+                  className="w-16 h-16 rounded-lg mr-4"
+                />
+                <div>
+                  <p className="font-semibold">{bicycle?.name}</p>
+                  <p className="font-medium mt-1">Brand: {bicycle?.brand}</p>
+                  <p className="font-bold">${bicycle?.price.toFixed(2)}</p>
                 </div>
-                <p className="font-bold">${item.price.toFixed(2)}</p>
               </div>
-            ))}
+            </div>
             <div className="mt-6">
               <div className="flex justify-between mb-2">
-                <p>Subtotal</p>
-                <p>${calculateTotal()}</p>
+                <p>Delivery</p>
+                <p>Free</p>
               </div>
-              <div className="flex justify-between mb-2">
+              {/* <div className="flex justify-between mb-2">
                 <p>Tax</p>
                 <p>$45.00</p>
-              </div>
+              </div> */}
               <div className="flex justify-between font-bold text-xl border-t pt-4">
                 <p>Total</p>
-                <p>${(parseFloat(calculateTotal()) + 45).toFixed(2)}</p>
+                {/* <p>${(parseFloat(calculateTotal()) + 45).toFixed(2)}</p> */}
+                <p>${bicycle?.price}</p>
               </div>
             </div>
           </div>
@@ -158,24 +153,13 @@ const CheckoutPage = () => {
                     className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full p-3 border rounded-lg mt-4 focus:ring-2 focus:ring-blue-500"
-                />
               </div>
 
               {/* Shipping Address */}
               <div className="mb-8">
                 <div className="flex items-center mb-4">
                   <MapPin className="w-6 h-6 text-green-600 mr-2" />
-                  <h2 className="text-2xl font-bold text-gray-800">
-                    Shipping Address
-                  </h2>
+                  <h2 className="text-2xl font-bold text-gray-800"> Address</h2>
                 </div>
                 <input
                   type="text"
@@ -209,14 +193,14 @@ const CheckoutPage = () => {
               </div>
 
               {/* Payment Method */}
-              <div className="mb-8">
+              {/* <div className="mb-8">
                 <div className="flex items-center mb-4">
                   <CreditCard className="w-6 h-6 text-purple-600 mr-2" />
                   <h2 className="text-2xl font-bold text-gray-800">
                     Payment Method
                   </h2>
                 </div>
-                <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="grid md:grid-cols-1 gap-4 mb-4">
                   <button
                     type="button"
                     onClick={() => setSelectedPayment("credit")}
@@ -226,18 +210,7 @@ const CheckoutPage = () => {
                         : "border-gray-300"
                     }`}
                   >
-                    <CreditCard className="mr-2" /> Credit Card
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedPayment("paypal")}
-                    className={`flex items-center justify-center p-4 border rounded-lg ${
-                      selectedPayment === "paypal"
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-gray-300"
-                    }`}
-                  >
-                    PayPal
+                    <CreditCard className="mr-2 bg" /> Credit Card
                   </button>
                 </div>
 
@@ -272,7 +245,7 @@ const CheckoutPage = () => {
                     />
                   </div>
                 )}
-              </div>
+              </div> */}
 
               {/* Submit Button */}
               <button
