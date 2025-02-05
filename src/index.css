@@ -26,3 +26,45 @@ body {
     color: #19a270; /* Secondary Color */
   }
 }
+
+/* Sidebar Menu Item Color */
+.ant-menu-item {
+  color: #014036 !important; /* Text color */
+}
+
+/* Selected Menu Item Color */
+.ant-menu-item-selected {
+  background-color: #edf2f1 !important; /* Background color */
+  color: #014036 !important; /* Selected text color */
+  font-weight: bold;
+}
+
+/* Menu Item Hover Color */
+.ant-menu-item:hover {
+  background-color: #d9f2e6 !important; /* Light green hover effect */
+  color: #014036 !important; /* Green text on hover */
+}
+
+/* ✅ Submenu Title (Parent of Children) Styling */
+.ant-menu-submenu-title {
+  color: #014036 !important; /* Default color */
+  /* Make it bold */
+}
+
+/* ✅ Submenu Children (Dropdown Items) Styling */
+.ant-menu-submenu .ant-menu-item {
+  color: #333 !important; /* Child items text color */
+  background-color: #f8f9fa !important; /* Light background */
+}
+
+/* ✅ Selected Submenu Child Item */
+.ant-menu-submenu .ant-menu-item-selected {
+  background-color: #cce5ff !important; /* Light blue selection */
+  color: #014036 !important; /* Blue text */
+}
+
+/* ✅ Hover Effect for Submenu Child Items */
+.ant-menu-submenu .ant-menu-item:hover {
+  background-color: #d9f2e6 !important;
+  color: #014036 !important;
+}

@@ -2,6 +2,7 @@ import { DashboardOutlined, PlusOutlined } from "@ant-design/icons";
 import { TAdminSidebarItem, TRoute } from "../types";
 import { NavLink } from "react-router-dom";
 import AddProduct from "../pages/Dashboard/Admin/ProductManagement/AddProduct";
+import UsersPage from "../pages/Dashboard/Admin/UserManagement/Users";
 
 export const adminPaths = [
   {
@@ -13,7 +14,7 @@ export const adminPaths = [
   {
     name: "Crate Product",
     path: "crate-product",
-    icon: <DashboardOutlined />,
+    icon: <PlusOutlined />,
     element: <AddProduct />,
   },
   {
@@ -21,10 +22,10 @@ export const adminPaths = [
     icon: <DashboardOutlined />,
     children: [
       {
-        name: "Crate User",
-        path: "crate-user",
+        name: "Users",
+        path: "users",
         icon: <PlusOutlined />,
-        element: <h1>crate-user</h1>,
+        element: <UsersPage />,
       },
     ],
   },
@@ -48,7 +49,7 @@ export const adminSidebarItems = adminPaths.reduce(
     if (item.children) {
       acc.push({
         key: item.name,
-        label: "NAV",
+        label: item.name,
         icon: item.icon,
         children: item.children.map((child) => {
           return {

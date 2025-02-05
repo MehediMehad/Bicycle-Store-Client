@@ -65,10 +65,9 @@ const AdminLayout = () => {
           )}
         </div>
         <Menu
-          theme="light"
           mode="inline"
           defaultSelectedKeys={["Dashboard"]}
-          items={adminSidebarItems}
+          items={adminSidebarItems} // items
         />
       </Sider>
       <Layout>
