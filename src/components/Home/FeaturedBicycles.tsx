@@ -3,17 +3,10 @@ import logo from "../../assets/icons/logo.png";
 import Card from "./Card";
 import Button from "../ui/Button";
 import { useGetAllBicycleQuery } from "../../redux/features/bicycle/bicycleApi";
-import { useState } from "react";
-import { TQueryParam } from "../../types/global.type";
-
-// Sample data for featured bicycles
 
 const FeaturedBicycles = () => {
-  const [params, setParams] = useState<TQueryParam[]>([]);
-
-  const { data: mainData, isLoading, isError } = useGetAllBicycleQuery(params);
+  const { data: mainData, isLoading } = useGetAllBicycleQuery(undefined);
   const bicycles = mainData?.data;
-  console.log("===>>>", bicycles, isError);
 
   if (isLoading) {
     return <p>Loading....</p>;
@@ -30,8 +23,12 @@ const FeaturedBicycles = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {bicycles.slice(0, 8).map((bike) => (
-          <Card bike={bike} />
+        {bicycles?.slice(0, 8).map((bike) => (
+          <Card
+            key={bike._id}
+            bike={bike}
+            imgSize="my-2 w-full min-h-64 max-h-64 object-fill"
+          />
         ))}
       </div>
       <NavLink to="/bicycles" className="flex justify-center mt-10">
