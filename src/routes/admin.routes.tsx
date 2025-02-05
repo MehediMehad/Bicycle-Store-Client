@@ -1,8 +1,15 @@
-import { DashboardOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  DashboardOutlined,
+  PlusOutlined,
+  ProductFilled,
+} from "@ant-design/icons";
 import { TAdminSidebarItem, TRoute } from "../types";
 import { NavLink } from "react-router-dom";
 import AddProduct from "../pages/Dashboard/Admin/ProductManagement/AddProduct";
 import UsersPage from "../pages/Dashboard/Admin/UserManagement/Users";
+import { User } from "lucide-react";
+import { MdAddChart } from "react-icons/md";
+import AllOrder from "../pages/Dashboard/Admin/OrderManagement/AllOrder";
 
 export const adminPaths = [
   {
@@ -14,12 +21,18 @@ export const adminPaths = [
   {
     name: "Crate Product",
     path: "crate-product",
-    icon: <PlusOutlined />,
+    icon: <MdAddChart />,
     element: <AddProduct />,
   },
   {
+    name: "Orders",
+    path: "all-order",
+    icon: <ProductFilled />,
+    element: <AllOrder />,
+  },
+  {
     name: "User Management",
-    icon: <DashboardOutlined />,
+    icon: <User />,
     children: [
       {
         name: "Users",
