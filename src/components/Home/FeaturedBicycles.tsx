@@ -2,88 +2,23 @@ import { NavLink } from "react-router-dom";
 import logo from "../../assets/icons/logo.png";
 import Card from "./Card";
 import Button from "../ui/Button";
+import { useGetAllBicycleQuery } from "../../redux/features/bicycle/bicycleApi";
+import { useState } from "react";
+import { TQueryParam } from "../../types/global.type";
 
 // Sample data for featured bicycles
-const featuredBicycles = [
-  {
-    _id: "1",
-    name: "Mountain Bike",
-    price: "$500",
-    image:
-      "https://i.postimg.cc/jSvBSCZZ/0519435-duranta-alloy-21-spd-dynamic-x-800-26-blue-removebg.png",
-  },
-  {
-    _id: "2",
-    name: "Road Bike",
-    price: "$700",
-    image:
-      "https://i.postimg.cc/jSvBSCZZ/0519435-duranta-alloy-21-spd-dynamic-x-800-26-blue-removebg.png",
-  },
-  {
-    _id: "3",
-    name: "Hybrid Bike",
-    price: "$600",
-    image:
-      "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738522611/Giant.jpg",
-  },
-  {
-    _id: "4",
-    name: "Electric Bike",
-    price: "$1200",
-    image: "https://m.media-amazon.com/images/I/81DPZ3XfrwL.jpg",
-  },
-  {
-    _id: "5",
-    name: "Folding Bike",
-    price: "$400",
-    image:
-      "https://i.postimg.cc/jSvBSCZZ/0519435-duranta-alloy-21-spd-dynamic-x-800-26-blue-removebg.png",
-  },
-  {
-    _id: "6",
-    name: "Kids Bike",
-    price: "$200",
-    image:
-      "https://www.rflbd.com/Application/storage/app/public/relativeContentPath/products/603898fc6b69e8ad0530ee15e39e3fef1.%20Potter_5_11zon.jpg",
-  },
-  {
-    _id: "6",
-    name: "Kids Bike",
-    price: "$200",
-    image:
-      "https://www.rflbd.com/Application/storage/app/public/relativeContentPath/products/603898fc6b69e8ad0530ee15e39e3fef1.%20Potter_5_11zon.jpg",
-  },
-  {
-    _id: "6",
-    name: "Kids Bike",
-    price: "$200",
-    image:
-      "https://www.rflbd.com/Application/storage/app/public/relativeContentPath/products/603898fc6b69e8ad0530ee15e39e3fef1.%20Potter_5_11zon.jpg",
-  },
-  {
-    _id: "6",
-    name: "Kids Bike",
-    price: "$200",
-    image:
-      "https://www.rflbd.com/Application/storage/app/public/relativeContentPath/products/603898fc6b69e8ad0530ee15e39e3fef1.%20Potter_5_11zon.jpg",
-  },
-  {
-    _id: "6",
-    name: "Kids Bike",
-    price: "$200",
-    image:
-      "https://www.rflbd.com/Application/storage/app/public/relativeContentPath/products/603898fc6b69e8ad0530ee15e39e3fef1.%20Potter_5_11zon.jpg",
-  },
-  {
-    _id: "6",
-    name: "Kids Bike",
-    price: "$200",
-    image:
-      "https://www.rflbd.com/Application/storage/app/public/relativeContentPath/products/603898fc6b69e8ad0530ee15e39e3fef1.%20Potter_5_11zon.jpg",
-  },
-];
 
 const FeaturedBicycles = () => {
+  const [params, setParams] = useState<TQueryParam[]>([]);
+
+  const { data: mainData, isLoading, isError } = useGetAllBicycleQuery(params);
+  const bicycles = mainData?.data;
+  console.log("===>>>", bicycles, isError);
+
+  if (isLoading) {
+    return <p>Loading....</p>;
+  }
+
   return (
     <div className="mx-auto px-10 py-8">
       <div className="flex justify-between items-center">
@@ -95,7 +30,7 @@ const FeaturedBicycles = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {featuredBicycles.slice(0, 8).map((bike) => (
+        {bicycles.slice(0, 8).map((bike) => (
           <Card bike={bike} />
         ))}
       </div>
