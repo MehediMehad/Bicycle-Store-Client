@@ -14,13 +14,13 @@ body {
 /* Custom Colors */
 @layer utilities {
   .text-primary {
-    color: #19a270; /* Primary Color */
-  }
-  .text-back {
-    color: #3c3b39; /* Primary Color
+    color: #014036; /* Primary Color */
   }
   .bg-primary {
-    background-color: #19a270; /* Primary Color */
+    background-color: #014036; /* Primary BG */
+  }
+  .text-back {
+    color: #3c3b39; /* Primary Color*/
   }
   .text-secondary {
     color: #19a270; /* Secondary Color */

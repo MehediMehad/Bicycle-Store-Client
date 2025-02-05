@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-[#014036] text-white">
       <div className="container mx-auto px-4 py-16 max-w-6xl">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand Section */}
@@ -113,8 +113,8 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-500">
+        <div className="border-t mt-8 pt-8 text-center">
+          <p className="text-white">
             © 2024 Pedal Planet. All Rights Reserved.
           </p>
         </div>

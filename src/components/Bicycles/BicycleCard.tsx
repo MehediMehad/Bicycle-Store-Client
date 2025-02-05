@@ -19,7 +19,7 @@ const BicycleCard = ({ bicycle }: BicycleCardProps) => {
         <span
           className={`absolute top-2 right-2 px-3 py-1 rounded-full text-xs font-semibold ${
             bicycle.availability === "In Stock"
-              ? "bg-green-100 text-green-700"
+              ? "bg-green-100 text-primary"
               : "bg-red-100 text-red-700"
           }`}
         >
@@ -28,7 +28,7 @@ const BicycleCard = ({ bicycle }: BicycleCardProps) => {
         <span
           className={`absolute top-2 left-2 px-3 py-1 rounded-full text-xs font-semibold ${
             bicycle.availability === "In Stock"
-              ? "bg-green-100 text-green-700"
+              ? "bg-green-100 text-primary"
               : "bg-red-100 text-red-700"
           }`}
         >
@@ -37,7 +37,7 @@ const BicycleCard = ({ bicycle }: BicycleCardProps) => {
       </div>
 
       {/* Details Section */}
-      <div className="p-4 bg-white flex flex-col flex-grow">
+      <div className="p-4 bg-[#edf2f1] flex flex-col flex-grow">
         <h3 className="text-xl font-bold text-gray-800 mb-2">{bicycle.name}</h3>
         <p className="text-sm text-gray-600 mb-1">
           <span className="font-semibold">Brand:</span> {bicycle.brand}
@@ -51,7 +51,7 @@ const BicycleCard = ({ bicycle }: BicycleCardProps) => {
           <div className="flex items-center justify-end">
             <NavLink
               to={`/details/${bicycle._id}`}
-              className="px-4 py-[6px] cursor-pointer bg-[#19a270] text-white font-medium rounded-lg border border-green-600 shadow-md hover:bg-[#19a262]"
+              className="px-4 py-[6px] cursor-pointer bg-primary text-white font-medium rounded-lg border border-green-600 shadow-md hover:bg-[#19a262]"
             >
               View Details
             </NavLink>
