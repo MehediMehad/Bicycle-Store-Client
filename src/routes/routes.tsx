@@ -14,6 +14,7 @@ import Home from "../pages/Home";
 import UsersPage from "../pages/Dashboard/Admin/UserManagement/Users";
 import UserProtectedLayout from "../components/layout/UserProtectedLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import ChangePassword from "../pages/Dashboard/User/ChangePassword";
 
 const routes = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const routes = createBrowserRouter([
         path: "user-management",
         element: <UsersPage />,
       },
+      {
+        path: "change-password",
+        element: <ChangePassword />,
+      },
     ],
   },
   {
@@ -94,6 +99,10 @@ const routes = createBrowserRouter([
       },
       {
         path: "all-users",
+        element: <UsersPage />,
+      },
+      {
+        path: "change-password",
         element: <UsersPage />,
       },
     ],

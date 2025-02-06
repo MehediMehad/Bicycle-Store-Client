@@ -109,6 +109,15 @@ const AdminLayout = () => {
                 </NavLink>
               ),
             },
+            {
+              key: "change-password",
+              icon: <MdAddChart />,
+              label: (
+                <NavLink to={"/admin/dashboard/change-password"}>
+                  Change Password
+                </NavLink>
+              ),
+            },
           ],
         },
       ];
