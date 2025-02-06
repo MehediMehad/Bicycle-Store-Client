@@ -90,7 +90,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "all-order",
-        element: <p>alalal</p>,
+        element: <p>All Orders</p>,
       },
       {
         path: "all-users",
