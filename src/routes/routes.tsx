@@ -15,6 +15,7 @@ import UsersPage from "../pages/Dashboard/Admin/UserManagement/Users";
 import UserProtectedLayout from "../components/layout/UserProtectedLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ChangePassword from "../pages/Dashboard/User/ChangePassword";
+import Products from "../pages/Dashboard/Admin/ProductManagement/Products";
 
 const routes = createBrowserRouter([
   {
@@ -60,16 +61,20 @@ const routes = createBrowserRouter([
         element: <AddProduct />,
       },
       {
+        path: "add-product",
+        element: <AddProduct />,
+      },
+      {
+        path: "update-product",
+        element: <Products />,
+      },
+      {
         path: "all-order",
         element: <AllOrder />,
       },
       {
         path: "all-users",
         element: <UsersPage />,
-      },
-      {
-        path: "add-product",
-        element: <AddProduct />,
       },
       {
         path: "user-management",

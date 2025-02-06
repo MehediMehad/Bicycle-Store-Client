@@ -68,3 +68,18 @@ body {
   background-color: #d9f2e6 !important;
   color: #014036 !important;
 }
+
+.update-button {
+  padding: 8px 16px;
+  background-color: #014036; /* Blue color */
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.update-button:hover {
+  background-color: #014036;
+  color: white;
+}

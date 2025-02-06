@@ -8,8 +8,18 @@ const bicycleManagementApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: [{ type: "product", id: "update" }],
+    }),
+    updateProduct: builder.mutation({
+      query: (body) => ({
+        url: `/products/${body.id}`,
+        method: "PUT",
+        body: body.data,
+      }),
+      invalidatesTags: [{ type: "user", id: "update" }],
     }),
   }),
 });
 
-export const { useAddBicycleMutation } = bicycleManagementApi;
+export const { useAddBicycleMutation, useUpdateProductMutation } =
+  bicycleManagementApi;

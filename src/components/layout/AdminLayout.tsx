@@ -10,6 +10,7 @@ import {
   MdDashboard,
   MdManageHistory,
   MdOutlineProductionQuantityLimits,
+  MdUpdate,
 } from "react-icons/md";
 import { Home, StepBack } from "lucide-react";
 // import { adminSidebarItems } from "../../routes/admin.routes";
@@ -61,6 +62,15 @@ const AdminLayout = () => {
               label: (
                 <NavLink to={"/admin/dashboard/add-product"}>
                   Add Product
+                </NavLink>
+              ),
+            },
+            {
+              key: "update-product",
+              icon: <MdUpdate />,
+              label: (
+                <NavLink to={"/admin/dashboard/update-product"}>
+                  Update Product
                 </NavLink>
               ),
             },
