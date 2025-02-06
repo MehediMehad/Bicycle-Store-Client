@@ -2,12 +2,121 @@ import { Layout, Menu } from "antd";
 import logo from "../../assets/icons/logo.png";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons"; // Icons for trigger
 import React from "react";
-import { Outlet } from "react-router-dom";
-import { adminSidebarItems } from "../../routes/admin.routes";
+import { NavLink, Outlet } from "react-router-dom";
+import { useAppSelector } from "../../redux/hooks";
+import { useCurrentUser } from "../../redux/features/auth/authSlice";
+import {
+  MdAddChart,
+  MdDashboard,
+  MdManageHistory,
+  MdOutlineProductionQuantityLimits,
+} from "react-icons/md";
+import { Home, StepBack } from "lucide-react";
+// import { adminSidebarItems } from "../../routes/admin.routes";
 
 const { Header, Content, Sider } = Layout;
+const userRole = {
+  ADMIN: "admin",
+  USER: "user",
+};
 
 const AdminLayout = () => {
+  const user = useAppSelector(useCurrentUser);
+  let sidebarItems;
+
+  switch (user!.userRole) {
+    case userRole.USER:
+      sidebarItems = [
+        {
+          key: "UserDashboard",
+          icon: <MdDashboard />,
+          label: <NavLink to={"/user/dashboard"}>Dashboard</NavLink>,
+        },
+        {
+          key: "view-order-history",
+          icon: <Home />,
+          label: (
+            <NavLink to={"/user/dashboard/view-order-history"}>
+              View order history
+            </NavLink>
+          ),
+        },
+      ];
+      break;
+    case userRole.ADMIN:
+      sidebarItems = [
+        {
+          key: "dashboard",
+          icon: <StepBack />,
+          label: <NavLink to={"/"}>Back to Home</NavLink>,
+        },
+        {
+          key: "ProductManagement",
+          icon: <MdOutlineProductionQuantityLimits />,
+          label: "Product Management",
+          children: [
+            {
+              key: "AddProduct",
+              icon: <MdAddChart />,
+              label: (
+                <NavLink to={"/admin/dashboard/add-product"}>
+                  Add Product
+                </NavLink>
+              ),
+            },
+            {
+              key: "ViewAllOrders",
+              icon: <MdManageHistory />,
+
+              label: (
+                <NavLink to={"/admin/dashboard/all-order"}>
+                  View All Orders
+                </NavLink>
+              ),
+            },
+            {
+              key: "ManageProduct",
+              icon: <MdManageHistory />,
+
+              label: (
+                <NavLink to={"/admin/dashboard/manage-product"}>
+                  Manage Product
+                </NavLink>
+              ),
+            },
+            {
+              key: "ManagingOrders",
+              icon: <MdAddChart />,
+              label: (
+                <NavLink to={"/admin/dashboard/managing-orders"}>
+                  Managing Orders
+                </NavLink>
+              ),
+            },
+          ],
+        },
+        {
+          key: "UserManagement",
+          icon: <MdAddChart />,
+          label: "User Management",
+          children: [
+            {
+              key: "DeactivatingAccounts",
+              icon: <MdAddChart />,
+              label: (
+                <NavLink to={"/admin/dashboard/user-management"}>
+                  User-Management
+                </NavLink>
+              ),
+            },
+          ],
+        },
+      ];
+      break;
+
+    default:
+      break;
+  }
   const [collapsed, setCollapsed] = React.useState(false);
 
   return (
@@ -66,8 +175,8 @@ const AdminLayout = () => {
         </div>
         <Menu
           mode="inline"
-          defaultSelectedKeys={["Dashboard"]}
-          items={adminSidebarItems} // items
+          defaultSelectedKeys={["dashboard"]}
+          items={sidebarItems} // items
         />
       </Sider>
       <Layout>
