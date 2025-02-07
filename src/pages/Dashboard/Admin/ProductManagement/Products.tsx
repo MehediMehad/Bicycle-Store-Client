@@ -1,15 +1,48 @@
-import { Table, Tag } from "antd";
+import { Button, Table, Tag, Modal } from "antd";
 import { NavLink } from "react-router-dom";
-import { useGetAllBicycleQuery } from "../../../../redux/features/admin/bicycleManagement";
+import {
+  useDeleteBicycleMutation,
+  useGetAllBicycleQuery,
+} from "../../../../redux/features/admin/bicycleManagement";
+import { toast } from "sonner";
+import { AiOutlineExclamationCircle } from "react-icons/ai";
+const { confirm } = Modal;
 
 const Products = () => {
   const {
     data: mainData,
     isLoading,
     isFetching,
+    refetch,
   } = useGetAllBicycleQuery(undefined);
+
+  const [deleteBicycle, { isLoading: isDeleting }] = useDeleteBicycleMutation();
+
   const orders = mainData?.data;
-  console.log(orders);
+
+  const showDeleteConfirm = (id: string) => {
+    confirm({
+      title: "Are you sure you want to delete this bicycle?",
+      icon: <AiOutlineExclamationCircle size={40} color="red" />,
+      content: "This action cannot be undone!",
+      okText: "Yes, Delete",
+      okType: "danger",
+      cancelText: "No",
+      onOk: async () => {
+        try {
+          await deleteBicycle(id).unwrap();
+          toast.success("Bicycle deleted successfully!");
+          refetch();
+        } catch (error) {
+          toast.error("Failed to delete bicycle.");
+          console.error(error);
+        }
+      },
+      onCancel() {
+        toast.info("🚫 Delete cancelled.");
+      },
+    });
+  };
 
   const tableData = orders?.map(
     ({ _id, brand, quantity, availability, type, image, name }) => ({
@@ -78,6 +111,21 @@ const Products = () => {
         >
           Update
         </NavLink>
+      ),
+    },
+    // Delete
+    {
+      title: "Delete",
+      key: "delete",
+      render: (item: { key: string }) => (
+        <Button
+          type="primary"
+          danger
+          loading={isDeleting}
+          onClick={() => showDeleteConfirm(item.key)}
+        >
+          Delete
+        </Button>
       ),
     },
   ];

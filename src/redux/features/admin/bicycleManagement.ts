@@ -58,6 +58,13 @@ const bicycleManagementApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["product"],
     }),
+    deleteBicycle: builder.mutation({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["product"],
+    }),
   }),
 });
 
@@ -66,4 +73,5 @@ export const {
   useUpdateProductMutation,
   useGetBicycleQuery,
   useGetAllBicycleQuery,
+  useDeleteBicycleMutation,
 } = bicycleManagementApi;

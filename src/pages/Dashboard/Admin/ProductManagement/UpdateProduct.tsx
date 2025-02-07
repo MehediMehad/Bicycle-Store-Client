@@ -18,7 +18,7 @@ import { Controller } from "react-hook-form";
 
 const UpdateProduct = () => {
   const { id } = useParams();
-  const { data, isLoading } = useGetBicycleQuery(id);
+  const { data, isLoading, refetch } = useGetBicycleQuery(id);
   const [updateProduct] = useUpdateProductMutation();
 
   const bicycle = data?.data;
@@ -58,6 +58,7 @@ const UpdateProduct = () => {
       await updateProduct({ id, data: formUpdatedData }).unwrap();
       toast.dismiss(toastId);
       toast.success("Bicycle updated successfully!", { duration: 2000 });
+      refetch();
     } catch (error: any) {
       toast.dismiss(toastId);
       toast.error(error?.data?.message || "Update failed.");
