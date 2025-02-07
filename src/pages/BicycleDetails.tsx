@@ -1,5 +1,5 @@
 import { NavLink, useParams } from "react-router-dom";
-import { useGetBicycleQuery } from "../redux/features/bicycle/bicycleApi";
+import { useGetBicycleQuery } from "../redux/features/admin/bicycleManagement";
 
 const BicycleDetailsPage = () => {
   const { id } = useParams();
@@ -18,7 +18,7 @@ const BicycleDetailsPage = () => {
           className="w-full lg:w-1/2 h-64 sm:h-80 lg:h-auto bg-no-repeat bg-cover lg:bg-center"
           style={{
             backgroundImage: `url(${
-              bicycle.image || "/api/placeholder/600/400"
+              bicycle?.image || "/api/placeholder/600/400"
             })`,
           }}
         ></div>
@@ -62,7 +62,7 @@ const BicycleDetailsPage = () => {
 
           {/* Buy Now Button */}
           <NavLink
-            to={`/checkout/${bicycle._id}`}
+            to={`/checkout/${bicycle?._id}`}
             className="bg-[#19a270] hover:bg-[#19a26d] text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg text-center transition-all duration-300"
           >
             Buy Now

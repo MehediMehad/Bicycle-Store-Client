@@ -1,5 +1,5 @@
 import FilteredBicycles from "../components/Bicycles/FilteredBicycles";
-import { useGetAllBicycleQuery } from "../redux/features/bicycle/bicycleApi";
+import { useGetAllBicycleQuery } from "../redux/features/admin/bicycleManagement";
 
 const Bicycles = () => {
   const { data: bicycles } = useGetAllBicycleQuery(undefined);

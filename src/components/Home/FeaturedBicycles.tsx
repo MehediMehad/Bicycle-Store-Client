@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../../assets/icons/logo.png";
 import Card from "./Card";
 import Button from "../ui/Button";
-import { useGetAllBicycleQuery } from "../../redux/features/bicycle/bicycleApi";
+import { useGetAllBicycleQuery } from "../../redux/features/admin/bicycleManagement";
 
 const FeaturedBicycles = () => {
   const { data: mainData, isLoading } = useGetAllBicycleQuery(undefined);

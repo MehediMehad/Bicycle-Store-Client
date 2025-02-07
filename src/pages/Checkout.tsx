@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { ShoppingCart, MapPin, User } from "lucide-react";
 import { useParams } from "react-router-dom";
-import { useGetBicycleQuery } from "../redux/features/bicycle/bicycleApi";
 import { useAppSelector } from "../redux/hooks";
 import { useCreateOrderMutation } from "../redux/features/order/orderApi";
 import { useCurrentUser } from "../redux/features/auth/authSlice";
 import { toast } from "sonner";
+import { useGetBicycleQuery } from "../redux/features/admin/bicycleManagement";
 
 const CheckoutPage = () => {
   const user = useAppSelector(useCurrentUser);

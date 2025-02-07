@@ -19,7 +19,7 @@ const AddProduct = () => {
 
   const onSubmit = async (data: any) => {
     console.log("Product Data:", data);
-    const toastId = toast.loading("Logging in");
+    const toastId = toast.loading("Product added...");
     try {
       const bicycleData = {
         name: data.name,

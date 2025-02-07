@@ -1,3 +1,5 @@
+import { TBicycle } from "../../../types";
+import { TQueryParam, TResponseRedux } from "../../../types/global.type";
 import { baseApi } from "../../api/baseApi";
 
 const bicycleManagementApi = baseApi.injectEndpoints({
@@ -10,16 +12,58 @@ const bicycleManagementApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [{ type: "product", id: "update" }],
     }),
+    getAllBicycle: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
+
+        if (args) {
+          args.forEach((item: TQueryParam) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+        return {
+          url: "/products",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: ["product"],
+      transformResponse: (response: TResponseRedux<TBicycle[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
+    getBicycle: builder.query({
+      query: (id) => {
+        return {
+          url: `/products/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["product"],
+      transformResponse: (response: TResponseRedux<TBicycle>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
     updateProduct: builder.mutation({
-      query: (body) => ({
-        url: `/products/${body.id}`,
+      query: (args) => ({
+        url: `/products/${args.id}`,
         method: "PUT",
-        body: body.data,
+        body: args.data,
       }),
-      invalidatesTags: [{ type: "user", id: "update" }],
+      invalidatesTags: ["product"],
     }),
   }),
 });
 
-export const { useAddBicycleMutation, useUpdateProductMutation } =
-  bicycleManagementApi;
+export const {
+  useAddBicycleMutation,
+  useUpdateProductMutation,
+  useGetBicycleQuery,
+  useGetAllBicycleQuery,
+} = bicycleManagementApi;

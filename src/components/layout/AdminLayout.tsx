@@ -69,7 +69,7 @@ const AdminLayout = () => {
               key: "update-product",
               icon: <MdUpdate />,
               label: (
-                <NavLink to={"/admin/dashboard/update-product"}>
+                <NavLink to={"/admin/dashboard/products"}>
                   Update Product
                 </NavLink>
               ),

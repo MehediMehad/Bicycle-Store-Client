@@ -29,6 +29,8 @@ const RForm = ({
 }: TFormProps) => {
   const formConfig: TFormConfig = {};
   if (defaultValues) {
+    console.log(defaultValues);
+
     formConfig["defaultValues"] = defaultValues;
   }
   if (resolver) {

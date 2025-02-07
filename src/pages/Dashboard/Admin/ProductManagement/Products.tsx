@@ -1,6 +1,6 @@
 import { Table, Tag } from "antd";
 import { NavLink } from "react-router-dom";
-import { useGetAllBicycleQuery } from "../../../../redux/features/bicycle/bicycleApi";
+import { useGetAllBicycleQuery } from "../../../../redux/features/admin/bicycleManagement";
 
 const Products = () => {
   const {
@@ -28,7 +28,7 @@ const Products = () => {
       title: "Image",
       key: "image",
       dataIndex: "image",
-      render: (image) => (
+      render: (image: string) => (
         <img src={image} alt="Bicycle" style={{ width: 50 }} />
       ),
     },
@@ -72,7 +72,10 @@ const Products = () => {
       title: "Update",
       key: "update",
       render: (item: { key: string }) => (
-        <NavLink className="update-button" to={`/product-update/${item.key}`}>
+        <NavLink
+          className="update-button"
+          to={`/admin/dashboard/product-update/${item.key}`}
+        >
           Update
         </NavLink>
       ),

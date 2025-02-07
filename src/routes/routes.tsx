@@ -16,6 +16,7 @@ import UserProtectedLayout from "../components/layout/UserProtectedLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ChangePassword from "../pages/Dashboard/User/ChangePassword";
 import Products from "../pages/Dashboard/Admin/ProductManagement/Products";
+import UpdateProduct from "../pages/Dashboard/Admin/ProductManagement/UpdateProduct";
 
 const routes = createBrowserRouter([
   {
@@ -65,8 +66,12 @@ const routes = createBrowserRouter([
         element: <AddProduct />,
       },
       {
-        path: "update-product",
+        path: "products",
         element: <Products />,
+      },
+      {
+        path: "product-update/:id",
+        element: <UpdateProduct />,
       },
       {
         path: "all-order",

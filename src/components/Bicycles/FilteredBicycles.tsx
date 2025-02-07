@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import BicycleCard from "./BicycleCard";
-import { useGetAllBicycleQuery } from "../../redux/features/bicycle/bicycleApi";
+import { useGetAllBicycleQuery } from "../../redux/features/admin/bicycleManagement";
 
 type TQueryParam = {
   name: string;
