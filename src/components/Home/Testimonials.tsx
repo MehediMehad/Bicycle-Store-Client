@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Truck, Shield, Wrench, CreditCard, ChevronRight } from "lucide-react";
 import bg from "../../assets/images/bgb.jpg";
 

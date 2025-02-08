@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Bike, Globe, Mountain, Leaf } from "lucide-react";
 
 const AboutPage = () => {

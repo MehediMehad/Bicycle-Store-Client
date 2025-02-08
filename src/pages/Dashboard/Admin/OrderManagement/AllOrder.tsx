@@ -52,7 +52,7 @@ const AllOrder = () => {
       key: "sp_message",
       dataIndex: "sp_message",
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      render: (text) => (
+      render: (_text) => (
         // <Tag color={text === "Success" ? "green" : "red"}>{text}</Tag>
         <Tag color="green">Success</Tag>
       ),
