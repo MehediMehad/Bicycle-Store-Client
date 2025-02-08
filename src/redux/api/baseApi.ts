@@ -10,8 +10,9 @@ import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
+  // baseUrl: "http://localhost:7000/api",
   baseUrl:
-    "https://bicycle-store-api-mehedimehad-mehedis-projects-b35f457d.vercel.app/api",
+    "https://bicycle-store-199wlvgxj-mehedis-projects-b35f457d.vercel.app/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
