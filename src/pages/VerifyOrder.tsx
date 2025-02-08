@@ -135,7 +135,7 @@ const VerifyOrderPage = () => {
                 <p className="text-gray-600">Original Amount</p>
                 <p className="font-semibold">
                   {transactionDetails?.currency}{" "}
-                  {transactionDetails?.amount.toFixed(2)}
+                  {transactionDetails?.amount?.toFixed(2)}
                 </p>
               </div>
             </div>
@@ -147,7 +147,7 @@ const VerifyOrderPage = () => {
                 <p className="text-gray-600">Payable Amount</p>
                 <p className="font-semibold">
                   {transactionDetails?.currency}{" "}
-                  {transactionDetails?.payable_amount.toFixed(2)}
+                  {/* {transactionDetails?.payable_amount.toFixed(2)} */}
                 </p>
               </div>
             </div>

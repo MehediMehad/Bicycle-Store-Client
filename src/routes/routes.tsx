@@ -17,6 +17,7 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import ChangePassword from "../pages/Dashboard/User/ChangePassword";
 import Products from "../pages/Dashboard/Admin/ProductManagement/Products";
 import UpdateProduct from "../pages/Dashboard/Admin/ProductManagement/UpdateProduct";
+import MyOrders from "../pages/Dashboard/User/MyOrders";
 
 const routes = createBrowserRouter([
   {
@@ -92,7 +93,7 @@ const routes = createBrowserRouter([
     ],
   },
   {
-    path: "/user/dashboard",
+    path: "/customer/dashboard",
     element: (
       <UserProtectedLayout>
         <Dashboard />
@@ -104,16 +105,12 @@ const routes = createBrowserRouter([
         element: <h1>User</h1>,
       },
       {
-        path: "all-order",
-        element: <p>All Orders</p>,
-      },
-      {
-        path: "all-users",
-        element: <UsersPage />,
-      },
-      {
         path: "change-password",
-        element: <UsersPage />,
+        element: <ChangePassword />,
+      },
+      {
+        path: "my-orders",
+        element: <MyOrders />,
       },
     ],
   },
@@ -129,33 +126,3 @@ const routes = createBrowserRouter([
 ]);
 
 export default routes;
-// {
-//   name: "Dashboard",
-//   path: "dashboard",
-//   icon: <DashboardOutlined />,
-//   element: <h1>Admin dashboard</h1>,
-// },
-// {
-//   name: "Crate Product",
-//   path: "crate-product",
-//   icon: <MdAddChart />,
-//   element: <AddProduct />,
-// },
-// {
-//   name: "Orders",
-//   path: "all-order",
-//   icon: <ProductFilled />,
-//   element: <AllOrder />,
-// },
-// {
-//   name: "User Management",
-//   icon: <User />,
-//   children: [
-//     {
-//       name: "Users",
-//       path: "users",
-//       icon: <PlusOutlined />,
-//       element: <UsersPage />,
-//     },
-//   ],
-// },

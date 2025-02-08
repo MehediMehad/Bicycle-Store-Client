@@ -9,6 +9,15 @@ import { toast } from "sonner";
 // import ResponsiveMenu from "./ResponsiveMenu";
 const Navbar = () => {
   const user = useAppSelector(useCurrentUser);
+  const NavbarMenu = [
+    { id: 1, title: "Home", link: "/" },
+    { id: 2, title: "Bicycles", link: "bicycles" },
+    { id: 3, title: "About ", link: "about" },
+    ...(user
+      ? [{ id: 4, title: "Dashboard", link: `${user.userRole}/dashboard` }]
+      : []),
+  ];
+  console.log(user);
 
   const dispatch = useAppDispatch();
   const [open, setOpen] = React.useState(false);
@@ -86,10 +95,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-const NavbarMenu = [
-  { id: 1, title: "Home", link: "/" },
-  { id: 2, title: "Bicycles", link: "bicycles" },
-  { id: 3, title: "About ", link: "about" },
-  { id: 4, title: "Dashboard", link: "admin/dashboard" },
-  // { id: 5, title: "Pricing", link: "#" },
-];

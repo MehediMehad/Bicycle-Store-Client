@@ -11,7 +11,7 @@ const UserProtectedLayout = ({ children }: UserProtectedLayoutProps) => {
   const user = useAppSelector(useCurrentUser);
   const dispatch = useAppDispatch();
 
-  if (!user || user.userRole !== "user") {
+  if (!user || user.userRole !== "customer") {
     dispatch(logout());
     return <Navigate to="/login" replace />;
   }

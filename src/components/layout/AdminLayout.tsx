@@ -1,24 +1,27 @@
 import { Layout, Menu } from "antd";
 import logo from "../../assets/icons/logo.png";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons"; // Icons for trigger
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  OrderedListOutlined,
+} from "@ant-design/icons"; // Icons for trigger
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 import { useCurrentUser } from "../../redux/features/auth/authSlice";
 import {
   MdAddChart,
-  MdDashboard,
+  MdHome,
   MdManageHistory,
   MdOutlineProductionQuantityLimits,
+  MdPassword,
   MdUpdate,
 } from "react-icons/md";
-import { Home, StepBack } from "lucide-react";
-// import { adminSidebarItems } from "../../routes/admin.routes";
 
 const { Header, Content, Sider } = Layout;
 const userRole = {
   ADMIN: "admin",
-  USER: "user",
+  USER: "customer",
 };
 
 const AdminLayout = () => {
@@ -29,16 +32,23 @@ const AdminLayout = () => {
     case userRole.USER:
       sidebarItems = [
         {
-          key: "UserDashboard",
-          icon: <MdDashboard />,
-          label: <NavLink to={"/user/dashboard"}>Dashboard</NavLink>,
+          key: "dashboard",
+          icon: <MdHome size={20} />,
+          label: <NavLink to={"/"}>Back to Home</NavLink>,
         },
         {
-          key: "view-order-history",
-          icon: <Home />,
+          key: "my-orders",
+          icon: <OrderedListOutlined />,
           label: (
-            <NavLink to={"/user/dashboard/view-order-history"}>
-              View order history
+            <NavLink to={`/customer/dashboard/my-orders`}>My Orders</NavLink>
+          ),
+        },
+        {
+          key: "change-password",
+          icon: <MdPassword />,
+          label: (
+            <NavLink to={"/customer/dashboard/change-password"}>
+              Change Password
             </NavLink>
           ),
         },
@@ -48,7 +58,7 @@ const AdminLayout = () => {
       sidebarItems = [
         {
           key: "dashboard",
-          icon: <StepBack />,
+          icon: <MdHome size={20} />,
           label: <NavLink to={"/"}>Back to Home</NavLink>,
         },
         {
@@ -69,9 +79,7 @@ const AdminLayout = () => {
               key: "update-product",
               icon: <MdUpdate />,
               label: (
-                <NavLink to={"/admin/dashboard/products"}>
-                  Update Product
-                </NavLink>
+                <NavLink to={"/admin/dashboard/products"}>Products</NavLink>
               ),
             },
             {
@@ -81,25 +89,6 @@ const AdminLayout = () => {
               label: (
                 <NavLink to={"/admin/dashboard/all-order"}>
                   View All Orders
-                </NavLink>
-              ),
-            },
-            {
-              key: "ManageProduct",
-              icon: <MdManageHistory />,
-
-              label: (
-                <NavLink to={"/admin/dashboard/manage-product"}>
-                  Manage Product
-                </NavLink>
-              ),
-            },
-            {
-              key: "ManagingOrders",
-              icon: <MdAddChart />,
-              label: (
-                <NavLink to={"/admin/dashboard/managing-orders"}>
-                  Managing Orders
                 </NavLink>
               ),
             },
@@ -194,7 +183,7 @@ const AdminLayout = () => {
         </div>
         <Menu
           mode="inline"
-          defaultSelectedKeys={["dashboard"]}
+          // defaultSelectedKeys={["dashboard"]}
           items={sidebarItems} // items
         />
       </Sider>

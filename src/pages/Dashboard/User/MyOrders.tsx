@@ -1,7 +1,9 @@
 import { Dropdown, Table, TableColumnsType, Tag } from "antd";
-import moment from "moment";
-import { useGetOrdersQuery } from "../../../../redux/features/order/orderApi";
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "../../../redux/hooks";
+import { useCurrentUser } from "../../../redux/features/auth/authSlice";
+import { useGetMyOrdersQuery } from "../../../redux/features/order/orderApi";
+import moment from "moment";
 
 type TTableData = {
   email: string;
@@ -13,28 +15,30 @@ type TTableData = {
   product: string;
 };
 
-const AllOrder = () => {
+const MyOrders = () => {
+  const user = useAppSelector(useCurrentUser);
+
   const {
     data: mainData,
     isLoading,
     isFetching,
-  } = useGetOrdersQuery(undefined);
+  } = useGetMyOrdersQuery(user?.userEmail);
   const orders = mainData?.data;
   console.log(orders);
 
-  const tableData = orders?.map(
-    ({ _id, email, quantity, transaction, totalPrice, product }) => ({
-      key: _id,
-      email,
-      quantity,
-      sp_message: transaction?.sp_message || "N/A",
-      date_time: transaction?.date_time
-        ? moment(transaction.date_time).format("YYYY-MM-DD HH:mm:ss")
+  // **TableData Create **
+  const tableData: TTableData[] =
+    orders?.map((order) => ({
+      key: order._id,
+      email: order.email,
+      quantity: order.quantity,
+      sp_message: order.transaction?.sp_message || "Pending",
+      date_time: order.transaction?.date_time
+        ? moment(order.transaction.date_time).format("YYYY-MM-DD HH:mm:ss")
         : "N/A",
-      totalPrice,
-      product,
-    })
-  );
+      totalPrice: order.totalPrice,
+      product: order.product,
+    })) || [];
 
   const columns: TableColumnsType<TTableData> = [
     {
@@ -101,4 +105,4 @@ const AllOrder = () => {
   );
 };
 
-export default AllOrder;
+export default MyOrders;

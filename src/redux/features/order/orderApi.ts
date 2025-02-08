@@ -32,6 +32,19 @@ const orderApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getMyOrders: builder.query({
+      query: (email) => ({
+        url: "/orders/my-orders",
+        method: "GET",
+        params: { email },
+      }),
+      transformResponse: (response: TResponseRedux<any[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
     verifyOrder: builder.query({
       query: (order_id) => ({
         url: "/orders/verify",
@@ -46,4 +59,5 @@ export const {
   useCreateOrderMutation,
   useGetOrdersQuery,
   useVerifyOrderQuery,
+  useGetMyOrdersQuery,
 } = orderApi;

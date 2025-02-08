@@ -16,7 +16,6 @@ const FilteredBicycles = () => {
     type: "",
     availability: "",
   });
-  console.log(">>>>>>", filters);
 
   const [sortBy, setSortBy] = useState("");
 
