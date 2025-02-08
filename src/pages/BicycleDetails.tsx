@@ -63,7 +63,7 @@ const BicycleDetailsPage = () => {
           {/* Buy Now Button */}
           <NavLink
             to={`/checkout/${bicycle?._id}`}
-            className="bg-[#19a270] hover:bg-[#19a26d] text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg text-center transition-all duration-300"
+            className="bg-[#014036] hover:bg-[#014036] text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg text-center transition-all duration-300"
           >
             Buy Now
           </NavLink>
