@@ -11,7 +11,7 @@ const Navbar = () => {
   const user = useAppSelector(useCurrentUser);
   const NavbarMenu = [
     { id: 1, title: "Home", link: "/" },
-    { id: 2, title: "Bicycles", link: "bicycles" },
+    { id: 2, title: "Bicycles", link: "/bicycles" },
     { id: 3, title: "About ", link: "about" },
     ...(user
       ? [{ id: 4, title: "Dashboard", link: `${user.userRole}/dashboard` }]
@@ -28,7 +28,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-white shadow-md">
-        <div className="relative container mx-auto flex items-center py-3 h-16 mt-1">
+        <div className="relative lg:container mx-auto flex items-center py-3 h-16 mt-1">
           {/* LOGO SECTION */}
           <div className="absolute left-0 text-2xl flex items-center justify-start gap-2 font-bold">
             <img className="w-12" src={logo} alt="" />

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import BicycleCard from "./BicycleCard";
 import { useGetAllBicycleQuery } from "../../redux/features/admin/bicycleManagement";
+import BicycleCard from "./BicycleCard";
 
 type TQueryParam = {
   name: string;
@@ -17,7 +17,7 @@ const FilteredBicycles = () => {
     availability: "",
   });
 
-  const [sortBy, setSortBy] = useState("");
+  // const [sortBy, setSortBy] = useState("");
 
   // State for query parameters
   const [params, setParams] = useState<TQueryParam[]>([]);
@@ -51,9 +51,9 @@ const FilteredBicycles = () => {
     }
 
     // Add sort option
-    if (sortBy) {
-      newParams.push({ name: "sort", value: sortBy });
-    }
+    // if (sortBy) {
+    //   newParams.push({ name: "sort", value: sortBy });
+    // }
 
     // Update params state
     setParams(newParams);
@@ -110,10 +110,10 @@ const FilteredBicycles = () => {
   };
 
   // Handle sort option change
-  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortBy(e.target.value);
-    updateParams();
-  };
+  // const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   setSortBy(e.target.value);
+  //   updateParams();
+  // };
 
   // Handle loading and error states
   if (isLoading) return <div className="text-center py-4">Loading...</div>;
@@ -183,6 +183,9 @@ const FilteredBicycles = () => {
             <option value="">All Categories</option>
             <option value="Road">Road</option>
             <option value="Mountain">Mountain</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="BMX">BMX</option>
+            <option value="Electric">Electric</option>
           </select>
         </div>
 
@@ -196,10 +199,11 @@ const FilteredBicycles = () => {
             <option value="">All</option>
             <option value="In Stock">In Stock</option>
             <option value="Out of Stock">Out of Stock</option>
+            <option value="Pre-Order">Pre Order</option>
           </select>
         </div>
 
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block mb-2">Sort By</label>
           <select
             value={sortBy}
@@ -210,7 +214,7 @@ const FilteredBicycles = () => {
             <option value="priceLowToHigh">Price: Low to High</option>
             <option value="priceHighToLow">Price: High to Low</option>
           </select>
-        </div>
+        </div> */}
       </div>
 
       {/* Right Side: Bicycle Cards */}
@@ -221,7 +225,13 @@ const FilteredBicycles = () => {
           </div>
         ) : (
           bicycles?.map((bicycle) => (
-            <BicycleCard key={bicycle._id} bicycle={bicycle} />
+            <BicycleCard
+              key={bicycle._id}
+              bike={bicycle}
+              imgSize="my-2 w-full min-h-52 max-h-52 object-cover"
+              btnLink={`/details/${bicycle._id}`}
+              btnName="BUY NOW"
+            />
           ))
         )}
       </div>

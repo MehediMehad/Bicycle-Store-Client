@@ -1,62 +1,42 @@
 import { NavLink } from "react-router-dom";
 import { TBicycle } from "../../types";
+import Button from "../ui/Button";
 
-interface BicycleCardProps {
-  bicycle: TBicycle;
-}
+const BicycleCard = ({
+  bike,
+  imgSize,
+  btnName,
+  btnLink,
+}: {
+  bike: TBicycle;
+  imgSize: string;
+  btnName: string;
+  btnLink: string;
+}) => {
+  console.log("Promp", bike);
 
-const BicycleCard = ({ bicycle }: BicycleCardProps) => {
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
-      {/* Image Section */}
-      <div className="relative h-48 overflow-hidden">
-        <img
-          src={bicycle.image}
-          alt={bicycle.name}
-          className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-300"
-        />
-        {/* Availability Badge */}
-        <span
-          className={`absolute top-2 right-2 px-3 py-1 rounded-full text-xs font-semibold ${
-            bicycle.availability === "In Stock"
-              ? "bg-green-100 text-primary"
-              : "bg-red-100 text-red-700"
-          }`}
-        >
-          {bicycle.availability}
-        </span>
-        <span
-          className={`absolute top-2 left-2 px-3 py-1 rounded-full text-xs font-semibold ${
-            bicycle.availability === "In Stock"
-              ? "bg-green-100 text-primary"
-              : "bg-red-100 text-red-700"
-          }`}
-        >
-          $ {bicycle.price}
-        </span>
-      </div>
-
-      {/* Details Section */}
-      <div className="p-4 bg-[#edf2f1] flex flex-col flex-grow">
-        <h3 className="text-xl font-bold text-gray-800 mb-2">{bicycle.name}</h3>
-        <p className="text-sm text-gray-600 mb-1">
-          <span className="font-semibold">Brand:</span> {bicycle.brand}
-        </p>
-        <p className="text-sm text-gray-600 mb-2">
-          <span className="font-semibold">Category:</span> {bicycle.type}
-        </p>
-
-        {/* Price Section */}
-        <div className="mt-auto">
-          <div className="flex items-center justify-end">
-            <NavLink
-              to={`/details/${bicycle._id}`}
-              className="px-4 py-[6px] cursor-pointer bg-primary text-white font-medium rounded-lg border border-green-600 shadow-md hover:bg-[#19a262]"
-            >
-              View Details
-            </NavLink>
-          </div>
+    <div className="bg-[#edf2f1] p-5">
+      <div className="flex flex-col flex-wrap justify-center items-center relative">
+        <img src={bike.image} alt={bike.name} className={imgSize} />
+        <h1 className="sm:text-2xl text-center md:text-3xl">{bike.name}</h1>
+        <div className="w-full">
+          <p className="text-[#1a463fe6] px-2 -[#FA0000] absolute top-5 left-2 bg-amber-500">
+            ৳ {bike.price}
+          </p>
+          <p className="text-[#1a463fe6] text-sm font-[550]">
+            Brand: {bike.brand}
+          </p>
+          <p className="text-[#1a463fe6] text-sm font-[550]">
+            Type: {bike.type}
+          </p>
+          <p className="text-[#1a463fe6] text-sm font-[550]">
+            Quantity: {bike.quantity}
+          </p>
         </div>
+        <NavLink to={btnLink}>
+          <Button name={btnName}></Button>
+        </NavLink>
       </div>
     </div>
   );

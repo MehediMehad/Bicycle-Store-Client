@@ -1,7 +1,16 @@
+import { NavLink } from "react-router-dom";
 import { TBicycle } from "../../types";
 import Button from "../ui/Button";
 
-const Card = ({ bike, imgSize }: { bike: TBicycle; imgSize: string }) => {
+const Card = ({
+  bike,
+  imgSize,
+  btnLink,
+}: {
+  bike: TBicycle;
+  imgSize: string;
+  btnLink: string;
+}) => {
   console.log("Promp", bike);
 
   return (
@@ -10,8 +19,10 @@ const Card = ({ bike, imgSize }: { bike: TBicycle; imgSize: string }) => {
         <img src={bike.image} alt={bike.name} className={imgSize} />
         <h1 className="sm:text-2xl text-center md:text-3xl">{bike.name}</h1>
         <p className="text-[#FA0000] text-sm font-[550]">{bike.type}</p>
-        <p className="text-[#014037]">৳ {bike.price}</p>
-        <Button name={"BUY NOW"}></Button>
+        <p className="text-[#014037] mt-1 font-[550]">৳{bike.price}</p>
+        <NavLink to={btnLink}>
+          <Button name={"BUY NOW"}></Button>
+        </NavLink>
       </div>
     </div>
   );

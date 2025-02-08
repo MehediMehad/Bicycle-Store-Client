@@ -28,6 +28,7 @@ const FeaturedBicycles = () => {
             key={bike._id}
             bike={bike}
             imgSize="my-2 w-full min-h-64 max-h-64 object-fill"
+            btnLink={`/details/${bike._id}`}
           />
         ))}
       </div>

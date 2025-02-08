@@ -32,13 +32,13 @@ const Testimonials = () => {
           name: "City Glider Pro",
           price: 799.99,
           image:
-            "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738525026/Specialized.jpg",
+            "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738997483/Trek.jpg",
         },
         {
           name: "Urban Cruiser Elite",
           price: 899.99,
           image:
-            "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738525026/Specialized.jpg",
+            "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738992183/Specialized.jpg",
         },
       ],
     },
@@ -50,13 +50,13 @@ const Testimonials = () => {
           name: "Trail Master X1",
           price: 1299.99,
           image:
-            "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738525026/Specialized.jpg",
+            "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738992065/Trek.jpg",
         },
         {
           name: "Peak Rider 3000",
           price: 1599.99,
           image:
-            "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738525026/Specialized.jpg",
+            "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738991142/Giant.jpg",
         },
       ],
     },
@@ -68,13 +68,13 @@ const Testimonials = () => {
           name: "E-Commuter Lite",
           price: 1499.99,
           image:
-            "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738525676/Scott.jpg",
+            "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738992183/Specialized.jpg",
         },
         {
           name: "Power Rider Pro",
           price: 2299.99,
           image:
-            "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738525824/Bianchi.jpg",
+            "https://res.cloudinary.com/dxbpbbpbh/image/upload/v1738992065/Trek.jpg",
         },
       ],
     },
@@ -82,7 +82,7 @@ const Testimonials = () => {
 
   const shopFeatures: ShopFeature[] = [
     {
-      icon: <Truck className="w-12 h-12 text-blue-600" />,
+      icon: <Truck className="w-12 h-12 text-[#043029]" />,
       title: "Free Shipping",
       description: "Free shipping on orders over $500",
     },
@@ -120,7 +120,7 @@ const Testimonials = () => {
                 onClick={() => setActiveCategory(category)}
                 className={`px-6 py-2 rounded-full transition ${
                   activeCategory === category
-                    ? "bg-blue-600 text-white"
+                    ? "bg-[#014036] text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-blue-100"
                 }`}
               >
@@ -153,10 +153,10 @@ const Testimonials = () => {
                       <h4 className="font-semibold text-gray-800">
                         {product.name}
                       </h4>
-                      <p className="text-blue-600 font-bold">
+                      <p className="text-[#014037] font-[550]">
                         ${product.price}
                       </p>
-                      <button className="mt-4 cursor-not-allowed w-full bg-blue-600 text-white py-2 rounded-lg flex items-center justify-center">
+                      <button className="mt-4 cursor-not-allowed w-full bg-[#014036] text-white py-2 rounded-lg flex items-center justify-center">
                         Upcoming <ChevronRight className="ml-2 w-5 h-5" />
                       </button>
                     </div>
