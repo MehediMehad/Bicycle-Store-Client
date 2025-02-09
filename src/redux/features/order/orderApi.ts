@@ -33,11 +33,20 @@ const orderApi = baseApi.injectEndpoints({
       },
     }),
     getMyOrders: builder.query({
-      query: (email) => ({
-        url: "/orders/my-orders",
-        method: "GET",
-        params: { email },
-      }),
+      query: (args) => {
+        const params = new URLSearchParams();
+
+        if (args) {
+          args.forEach((item: TQueryParam) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+        return {
+          url: "/orders/my-orders",
+          method: "GET",
+          params: params,
+        };
+      },
       transformResponse: (response: TResponseRedux<any[]>) => {
         return {
           data: response.data,

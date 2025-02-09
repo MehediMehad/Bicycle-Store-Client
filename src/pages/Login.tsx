@@ -14,11 +14,6 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const [login] = useLoginMutation(undefined);
 
-  const defaultValues = {
-    email: "jon@example.com",
-    password: "user1234",
-  };
-
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading("Logging in");
     try {
@@ -53,11 +48,7 @@ const Login = () => {
         </div>
 
         {/* 🔹 Login Form */}
-        <RForm
-          className="space-y-4"
-          onSubmit={onSubmit}
-          defaultValues={defaultValues}
-        >
+        <RForm className="space-y-4" onSubmit={onSubmit}>
           <RInput
             type="text"
             name="email"

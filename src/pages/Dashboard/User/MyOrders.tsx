@@ -1,7 +1,5 @@
 import { Dropdown, Table, TableColumnsType, Tag } from "antd";
 import { NavLink } from "react-router-dom";
-import { useAppSelector } from "../../../redux/hooks";
-import { useCurrentUser } from "../../../redux/features/auth/authSlice";
 import { useGetMyOrdersQuery } from "../../../redux/features/order/orderApi";
 import moment from "moment";
 
@@ -16,13 +14,11 @@ type TTableData = {
 };
 
 const MyOrders = () => {
-  const user = useAppSelector(useCurrentUser);
-
   const {
     data: mainData,
     isLoading,
     isFetching,
-  } = useGetMyOrdersQuery(user?.userEmail);
+  } = useGetMyOrdersQuery(undefined);
   const orders = mainData?.data;
   console.log(orders);
 
