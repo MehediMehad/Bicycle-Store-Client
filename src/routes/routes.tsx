@@ -18,11 +18,13 @@ import ChangePassword from "../pages/Dashboard/User/ChangePassword";
 import Products from "../pages/Dashboard/Admin/ProductManagement/Products";
 import UpdateProduct from "../pages/Dashboard/Admin/ProductManagement/UpdateProduct";
 import MyOrders from "../pages/Dashboard/User/MyOrders";
+import ErrorPage from "../pages/ErrorPage";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -52,6 +54,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/admin/dashboard",
+    errorElement: <ErrorPage />,
     element: (
       <AdminProtectedLayout>
         <Dashboard />
@@ -94,6 +97,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/customer/dashboard",
+    errorElement: <ErrorPage />,
     element: (
       <UserProtectedLayout>
         <Dashboard />
@@ -114,7 +118,6 @@ const routes = createBrowserRouter([
       },
     ],
   },
-
   {
     path: "/login",
     element: <Login />,
