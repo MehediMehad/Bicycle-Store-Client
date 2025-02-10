@@ -12,9 +12,9 @@ const Navbar = () => {
   const NavbarMenu = [
     { id: 1, title: "Home", link: "/" },
     { id: 2, title: "Bicycles", link: "/bicycles" },
-    { id: 3, title: "About ", link: "about" },
+    { id: 3, title: "About ", link: "/about" },
     ...(user
-      ? [{ id: 4, title: "Dashboard", link: `${user.userRole}/dashboard` }]
+      ? [{ id: 4, title: "Dashboard", link: `/${user.userRole}/dashboard` }]
       : []),
   ];
   console.log(user);
@@ -25,6 +25,9 @@ const Navbar = () => {
     dispatch(logout());
     toast.success("Logout Successfully !", { duration: 2000 });
   };
+  if (!user) {
+    <p>Loading....</p>;
+  }
   return (
     <>
       <nav className="bg-white shadow-md">
